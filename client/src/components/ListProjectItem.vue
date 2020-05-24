@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     selectProjectItem: function(){
-      eventBus.$emit('project-item-selected', this.project);
+      window.location.href = `/coding/${this.project.id}`;
     }
   }
 }

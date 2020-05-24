@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="container">
-    <div class="details">
+    <div v-if="project" class="details">
+      <a v-bind:href="'/'+ project.type">Back to list</a>
       <h1>{{ project.name }}</h1>
       <h2>Date: {{ project.date }}</h2>
       <div class="row">
@@ -8,9 +9,10 @@
         <article class="description">
           <h2>Description</h2>
           <p>{{ project.details }}</p>
+          <a v-bind:href="project.link" class="btn" type="button" name="button">View Project</a>
         </article>
       </div>
-      <button type="button" name="button">View Project</button>
+
     </div>
 
   </div>
@@ -31,7 +33,7 @@ export default {
     const id = this.$route.params.id;
     PortfolioService.getSingleCodingProject(id)
     .then(res => this.project = res);
-  }
+  },
 }
 </script>
 
@@ -44,11 +46,13 @@ export default {
 .details{
   max-width: 70%;
   align-self: center;
+  align-items: center;
 }
 
 .description{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50%;
 }
 
@@ -57,5 +61,9 @@ export default {
 }
 .desciption,img{
   width: 50%;
+}
+
+.btn{
+  width:200px;
 }
 </style>

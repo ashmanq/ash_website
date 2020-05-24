@@ -31,7 +31,9 @@ nav a{
   padding-left: 10px;
 }
 
-button{
+.btn{
+  text-decoration: none;
+  display:block;
   padding:20px;
   font-size: 1.4em;
   margin: 20px;
@@ -41,7 +43,7 @@ button{
   transition: 0.5s;
 }
 
-button:hover{
+.btn:hover{
   background-color: #9374BC;
 }
 
