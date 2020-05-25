@@ -17,7 +17,7 @@ specify a custom Environmental Variable called 'base_uri' with a value of
 the sub route of the app. E.g if the app is going to be on
 www.yoursite.com/backend then the base_uri will be '/backend'.
 
-####Notes: 
+Notes: 
 
 I had to change the server.js filename to app.js as the Node.js app manager
 didn't use the specified application startup file and just created an app.js
