@@ -5,7 +5,6 @@
       <p>My name is Ashir Qureshi and the purpose of this site is for me to
         display my portfolio of work.</p>
     </div>
-
   </div>
 </template>
 

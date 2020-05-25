@@ -1,3 +1,7 @@
+if (typeof(PhusionPassenger) !== 'undefined') {
+    PhusionPassenger.configure({ autoInstall: false });
+}
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -29,7 +33,11 @@ con.connect((err) => {
   console.log('MySQL Connected...');
 });
 
+if (typeof(PhusionPassenger) !== 'undefined') {
+    app.listen('passenger');
+} else {
+  app.listen(3000, function () {
+    console.log(`Listening on port ${ this.address().port }`);
+  })
 
-app.listen(3000, function () {
-  console.log(`Listening on port ${ this.address().port }`);
-})
+}

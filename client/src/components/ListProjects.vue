@@ -2,6 +2,9 @@
 <template lang="html">
   <div class="container">
     <list-project-item v-if="results" v-for="(project, index) in results" :project="project" :key="index" ></list-project-item>
+    <p v-if="!results">
+      There was an issue loading this list!
+    </p>
   </div>
 </template>
 
@@ -30,5 +33,7 @@ export default {
 <style lang="css" scoped>
 .container {
   display: flex;
+  justify-content: center;
 }
+
 </style>
