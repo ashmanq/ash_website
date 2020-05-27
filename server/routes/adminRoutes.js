@@ -1,19 +1,45 @@
 const express = require('express');
-
+const authorisation = require('../authorisation')
 // Validation of entries to schema
-const Joi = require('@hapi/joi');
-const userSchema = require('../validation/userSchema.js');
+// const Joi = require('@hapi/joi');
+const { loginValidation } = require('../validation.js');
 
+// The router for all admin pages
 const createRouter = function(con) {
 
   const router = express.Router();
 
   // Admin login route
   router.post('/login', (req, res) => {
-    const { error } = userSchema.validate(req.body);
+
+    // Validation of login details
+    const { error } = loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
-    return res.json("Success!");
-  })
+
+    // We then check if the username exists in the database
+    let sql = ("SELECT * FROM users WHERE username = ?");
+    let query = con.query(sql, req.body.username, (err, result) => {
+      if(err) res.status(401).send(err);
+
+      // If we don't find a user matching the submitted username we return
+      // a generic error
+      if(!result.length) res.status(401).send("Invalid username or password");
+
+      // If a user is found we take the result and allocate it to foundUser
+      const foundUser = result[0];
+
+      // Authorisation - We compare the received password with the hashed
+      // password stored for the user on the database
+      authorisation(req, foundUser)
+      .then((result) => {
+        if(result) {
+          res.json("Success!");
+        } else {
+          res.status(401).send("Invalid username or password");
+        }
+      })
+    });
+  });
 
   // Get all entries in the database
   router.get('/', (req, res) => {
