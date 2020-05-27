@@ -1,13 +1,19 @@
-const router = require('express').Router;
+const express = require('express');
 
-// These routes will be protected routes
+// Validation of entries to schema
+const Joi = require('@hapi/joi');
+const userSchema = require('../validation/userSchema.js');
 
-const createRouter = function(con, table) {
+const createRouter = function(con) {
+
   const router = express.Router();
 
   // Admin login route
-
-  router.post('/login')
+  router.post('/login', (req, res) => {
+    const { error } = userSchema.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    return res.json("Success!");
+  })
 
   // Get all entries in the database
   router.get('/', (req, res) => {
@@ -53,4 +59,4 @@ const createRouter = function(con, table) {
 };
 
 
-module.exports = router;
+module.exports = createRouter;

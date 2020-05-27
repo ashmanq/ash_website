@@ -3,13 +3,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mysql = require('mysql');
-const dbConfig = require('./config');
 
 //Import Routes
-const createRouter = require('./helpers/create_router.js');
-const authRoute = require('./helpers/auth.js');
+const userRoutes = require('./routes/userRoutes.js');
+const adminRoutes = require('./routes/adminRoutes.js');
 
-
+// Middleware
 app.use(express.json());
 app.use(cors());
 
@@ -27,8 +26,10 @@ con.connect((err) => {
   if(err) throw err;
 
   // We create routers for both coding and drawing projects
-  const codingRouter = createRouter(con, 'coding');
-  const drawingRouter = createRouter(con, 'drawing');
+  const codingRouter = userRoutes(con, 'coding');
+  const drawingRouter = userRoutes(con, 'drawing');
+  const adminRouter = adminRoutes(con);
+
 
   // In production environment the app sits in a subdomain. A check is made for a
   // production environment URI. If one exists it is appended to the app routes
@@ -36,12 +37,12 @@ con.connect((err) => {
     // Routes with base_uri appended
     app.use(process.env.base_uri + '/api/coding', codingRouter);
     app.use(process.env.base_uri + '/api/drawing', drawingRouter);
-    app.use(process.env.base_uri + '/api/admin', authRoute);
+    app.use(process.env.base_uri + '/api/admin', adminRoute);
   } else {
     // Routes without any base_uri
     app.use('/api/coding', codingRouter);
     app.use('/api/drawing', drawingRouter);
-    app.use('/api/admin', authRoute);
+    app.use('/api/admin', adminRouter);
   }
   console.log('MySQL Connected...');
 });
