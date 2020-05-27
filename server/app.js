@@ -1,9 +1,14 @@
+const dotenv = require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const mysql = require('mysql');
 const dbConfig = require('./config');
+
+//Import Routes
 const createRouter = require('./helpers/create_router.js');
+const authRoute = require('./helpers/auth.js');
+
 
 app.use(express.json());
 app.use(cors());
@@ -11,10 +16,10 @@ app.use(cors());
 
 // Create a connection to the MySQL database using configuration from config file
 const con = mysql.createConnection({
-  host: dbConfig.host,
-  user: dbConfig.user,
-  password: dbConfig.password,
-  database: dbConfig.database
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 // Connect to the database and create routes
@@ -31,10 +36,12 @@ con.connect((err) => {
     // Routes with base_uri appended
     app.use(process.env.base_uri + '/api/coding', codingRouter);
     app.use(process.env.base_uri + '/api/drawing', drawingRouter);
+    app.use(process.env.base_uri + '/api/admin', authRoute);
   } else {
     // Routes without any base_uri
     app.use('/api/coding', codingRouter);
     app.use('/api/drawing', drawingRouter);
+    app.use('/api/admin', authRoute);
   }
   console.log('MySQL Connected...');
 });

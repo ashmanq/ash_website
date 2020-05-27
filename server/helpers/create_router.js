@@ -22,25 +22,29 @@ const createRouter = function(con, table) {
     });
   });
 
-  // Add an entry to the database
-  router.post('/add', (req, res) => {
-    const entry = req.body;
-    let sql = `INSERT INTO ${table} SET ?`;
-    let query = con.query(sql, entry, (err, result) => {
-      if(err) throw err;
-      res.json(result);
-    });
-  });
+  // These routes will be protected routes
 
-  // Delete an entry from the database
-  router.delete('/delete/:id', (req, res) => {
-    const id = req.params.id;
-    let sql = `DELETE FROM ${table} WHERE id = ?`;
-    let query = con.query(sql, id, (err, result) => {
-      if(err) throw err;
-      res.json(result);
-    });
-  });
+
+  
+  // // Add an entry to the database
+  // router.post('/add', (req, res) => {
+  //   const entry = req.body;
+  //   let sql = `INSERT INTO ${table} SET ?`;
+  //   let query = con.query(sql, entry, (err, result) => {
+  //     if(err) throw err;
+  //     res.json(result);
+  //   });
+  // });
+  //
+  // // Delete an entry from the database
+  // router.delete('/delete/:id', (req, res) => {
+  //   const id = req.params.id;
+  //   let sql = `DELETE FROM ${table} WHERE id = ?`;
+  //   let query = con.query(sql, id, (err, result) => {
+  //     if(err) throw err;
+  //     res.json(result);
+  //   });
+  // });
 
   return router;
 };
