@@ -1,20 +1,22 @@
-const baseUrl = "http://localhost:3000/api/coding/";
+const dotenv = require('dotenv').config();
+const apiUrl = process.env.VUE_APP_API_URL;
+const codingUrl = apiUrl + 'coding';
 
 export default {
 
   getAllCodingProjects() {
-  return fetch(baseUrl)
+  return fetch(codingUrl)
   .then(res => res.json());
   },
 
   getSingleCodingProject(id) {
-  return fetch(baseUrl + id)
+  return fetch(codingUrl + id)
   .then(res => res.json());
   },
 
   addNewCodingProject(newProject) {
     console.log(newProject);
-    return fetch(baseUrl, {
+    return fetch(codingUrl, {
       method: 'POST',
       body: JSON.stringify(newProject),
       headers: { 'Content-Type': 'application/json'}
@@ -23,7 +25,7 @@ export default {
   },
 
   updateCodingProject(id, payload) {
-    return fetch(baseUrl + id, {
+    return fetch(codingUrl + id, {
       method: 'PUT',
       body: JSON.stringify(payload),
       headers: { 'Content-Type': 'application/json'}
@@ -32,7 +34,7 @@ export default {
   },
 
   deleteCodingProject(id) {
-    return fetch(baseUrl + id, {
+    return fetch(codingUrl + id, {
       method: 'DELETE'
     })
   }

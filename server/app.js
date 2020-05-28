@@ -33,11 +33,11 @@ con.connect((err) => {
 
   // In production environment the app sits in a subdomain. A check is made for a
   // production environment URI. If one exists it is appended to the app routes
-  if(process.env.base_uri){
+  if(process.env.SUB_URI){
     // Routes with base_uri appended
-    app.use(process.env.base_uri + '/api/coding', codingRouter);
-    app.use(process.env.base_uri + '/api/drawing', drawingRouter);
-    app.use(process.env.base_uri + '/api/admin', adminRoute);
+    app.use(process.env.SUB_URI + '/api/coding', codingRouter);
+    app.use(process.env.SUB_URI + '/api/drawing', drawingRouter);
+    app.use(process.env.SUB_URI + '/api/admin', adminRoute);
   } else {
     // Routes without any base_uri
     app.use('/api/coding', codingRouter);

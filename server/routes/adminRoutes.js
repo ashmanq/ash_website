@@ -41,55 +41,16 @@ const createRouter = function(con) {
       const authorised = await authorisation(req, user);
       if(!authorised) return res.status(401).send("Invalid username or password");
 
-      // Create and assign a token
-      const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET);
+      // Create and assign a token we use the user id as part of the token
+      const token = jwt.sign({id: user.id,
+        exp: Math.floor(Date.now() / 1000) + (60 * 60)},
+        process.env.TOKEN_SECRET);
+      // If successfull in logging in we send back the token as 'auth-token'
       res.header('auth-token', token).send(token);
 
-      // res.json("Logged In!")
     });
 
 
-  });
-
-  // // Get all entries in the database
-  // router.get('/', (req, res) => {
-  //   con.query(`SELECT * FROM ${table}`, function(err, result) {
-  //     if(err) throw err;
-  //     res.json(result);
-  //   });
-  // });
-  //
-  // // Find an existing entry in the database using it's id
-  // router.get('/:id', (req, res) => {
-  //   const id = req.params.id;
-  //   console.log(id);
-  //   let sql = (`SELECT * FROM ${table} WHERE id = ?`);
-  //   let query = con.query(sql, id, (err, result) => {
-  //     if(err) throw err;
-  //     res.json(result[0]);
-  //   });
-  // });
-
-
-  // Add an entry to the database
-  router.post('/add', verify, (req, res) => {
-    res.send("You made it boss!");
-    // const entry = req.body;
-    // let sql = `INSERT INTO ${table} SET ?`;
-    // let query = con.query(sql, entry, (err, result) => {
-    //   if(err) throw err;
-    //   res.json(result);
-    // });
-  });
-
-  // Delete an entry from the database
-  router.delete('/delete/:id', (req, res) => {
-    const id = req.params.id;
-    let sql = `DELETE FROM ${table} WHERE id = ?`;
-    let query = con.query(sql, id, (err, result) => {
-      if(err) throw err;
-      res.json(result);
-    });
   });
 
   return router;
