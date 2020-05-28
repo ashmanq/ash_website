@@ -15,7 +15,7 @@ const sql = ` DROP TABLE IF EXISTS coding;
                 name VARCHAR(255),
                 type VARCHAR(255),
                 details TEXT,
-                date DATETIME,
+                date DATE,
                 image VARCHAR(255),
                 link VARCHAR(255)
               );
@@ -24,7 +24,7 @@ const sql = ` DROP TABLE IF EXISTS coding;
                 name VARCHAR(255),
                 details TEXT,
                 type VARCHAR(255),
-                date DATETIME,
+                date DATE,
                 image VARCHAR(255),
                 link VARCHAR(255)
               );`;

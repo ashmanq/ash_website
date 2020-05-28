@@ -21,6 +21,39 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
+const projectValidation = (data) => {
+  const schema = Joi.object({
+    name: Joi.string()
+      .alphanum()
+      .max(255)
+      .required(),
+
+    details: Joi.string()
+      .min(6)
+      .max(4000)
+      .required(),
+
+    date: Joi.date()
+      .required(),
+
+    image: Joi.string()
+      .alphanum()
+      .max(255),
+
+    link: Joi.string()
+      .alphanum()
+      .max(255),
+
+    type: Joi.string()
+    .alphanum()
+    .max(255)
+    .required()
+
+  });
+  return schema.validate(data);
+};
+
 
 
 module.exports.loginValidation = loginValidation;
+module.exports.projectValidation = projectValidation;
