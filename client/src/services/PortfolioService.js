@@ -1,6 +1,7 @@
 const dotenv = require('dotenv').config();
 const apiUrl = process.env.VUE_APP_API_URL;
-const codingUrl = apiUrl + 'coding';
+const codingUrl = apiUrl + 'coding/';
+const adminUrl = apiUrl + 'admin/';
 
 export default {
 
@@ -37,5 +38,14 @@ export default {
     return fetch(codingUrl + id, {
       method: 'DELETE'
     })
+  },
+
+  login(payload) {
+    return fetch(adminUrl + 'login', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type' : 'application/json'}
+    })
+    .then(res => res.json())
   }
 }

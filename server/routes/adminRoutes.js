@@ -20,18 +20,18 @@ const createRouter = function(con) {
 
     // Validation of login details
     const { error } = loginValidation(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(400).send({auth:false, token: null, error: error.details[0].message});
 
     // We then check if the username exists in the database
     let sql = ("SELECT * FROM users WHERE username = ?");
 
     await con.query(sql, req.body.username, async (err, result) => {
 
-      if(err) return res.status(400).send(err);
+      if(err) return res.status(400).json(err);
 
       // If we don't find a user matching the submitted username we return
       // a generic error
-      if(!result.length) return res.status(401).send("Invalid username or password");
+      if(!result.length) return res.status(401).send({auth: false, error: "Invalid username or password"});
 
       // If a user is found we take the result and allocate it to foundUser
       const user = result[0];
@@ -39,14 +39,14 @@ const createRouter = function(con) {
       // Authorisation - We compare the received password with the hashed
       // password stored for the user on the database
       const authorised = await authorisation(req, user);
-      if(!authorised) return res.status(401).send("Invalid username or password");
+      if(!authorised) return res.status(401).send({auth: false, error: "Invalid username or password"});
 
       // Create and assign a token we use the user id as part of the token
       const token = jwt.sign({id: user.id,
         exp: Math.floor(Date.now() / 1000) + (60 * 60)},
         process.env.TOKEN_SECRET);
       // If successfull in logging in we send back the token as 'auth-token'
-      res.header('auth-token', token).send(token);
+      res.header('auth-token', token).send({auth: true, token: token, user: user.username});
 
     });
 

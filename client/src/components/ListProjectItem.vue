@@ -36,6 +36,8 @@ export default {
   flex-direction: column;
   background-color: #5A33AB;
   color:#DFDFDF;
+  width: 25vw;
+  min-width: 200px;
   margin: 20px;
   padding: 20px;
   border-radius: 5px;

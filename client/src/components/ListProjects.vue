@@ -33,6 +33,7 @@ export default {
 <style lang="css" scoped>
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 

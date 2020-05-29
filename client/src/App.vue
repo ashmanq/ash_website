@@ -27,6 +27,10 @@ export default {
   margin-top: 60px;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
 nav a{
   padding-left: 10px;
 }
@@ -35,12 +39,13 @@ nav a{
   text-decoration: none;
   display:block;
   padding:20px;
-  font-size: 1.4em;
+  font-size: 1em;
   margin: 20px;
   border-radius: 10px;
+  border-style: hidden;
   background-color: #D4BAE4;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .btn:hover{

@@ -24,7 +24,6 @@ const loginValidation = (data) => {
 const projectValidation = (data) => {
   const schema = Joi.object({
     name: Joi.string()
-      .alphanum()
       .max(255)
       .required(),
 
@@ -37,15 +36,12 @@ const projectValidation = (data) => {
       .required(),
 
     image: Joi.string()
-      .alphanum()
       .max(255),
 
     link: Joi.string()
-      .alphanum()
       .max(255),
 
     type: Joi.string()
-    .alphanum()
     .max(255)
     .required()
 
