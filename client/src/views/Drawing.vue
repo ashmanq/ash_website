@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="container">
-    <h1>Coding Projects</h1>
-    <list-projects type="coding"></list-projects>
+    <h1>Drawing Projects</h1>
+    <list-projects type="drawing"></list-projects>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import ListProjects from '@/components/user/ListProjects.vue';
 
 export default {
-  name: 'coding-view',
+  name: 'drawing-view',
   data(){
     return {
 

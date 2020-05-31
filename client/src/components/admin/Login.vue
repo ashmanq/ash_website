@@ -24,6 +24,7 @@
 <script>
 
 import PortfolioService from '@/services/PortfolioService.js';
+import {eventBus} from '@/main.js';
 
 export default {
   name: 'login',
@@ -45,12 +46,15 @@ export default {
       .then((res) => {
         this.username = '';
         this.password = '';
+        if(res == "err") {
+          eventBus.$emit('authenticated', false);
+          this.msg = "Error connecting to server!";
+          return;
+        }
         if(res.auth) {
-          localStorage.setItem('user', JSON.stringify(res.user));
-          localStorage.setItem('token', JSON.stringify(res.token));
+          eventBus.$emit('authenticated', true);
         } else {
-          localStorage.removeItem('user');
-          localStorage.removeItem('token');
+          eventBus.$emit('authenticated', false);
           this.msg = res.error;
         }
       })

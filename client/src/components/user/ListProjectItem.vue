@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     selectProjectItem: function(){
-      window.location.href = `/coding/${this.project.id}`;
+      window.location.href = `/portfolio/${this.project.type}/${this.project.id}`;
     }
   }
 }
@@ -46,6 +46,7 @@ export default {
 
 .container:hover {
   background-color:#341D87;
+  cursor: pointer;
 }
 
 img{

@@ -20,7 +20,7 @@ const createRouter = function(con, table) {
   // Find an existing entry in the database using it's id
   router.get('/:id', (req, res) => {
     const id = req.params.id;
-    console.log(id);
+
     let sql = (`SELECT * FROM ${table} WHERE id = ?`);
     let query = con.query(sql, id, (err, result) => {
       if(err) throw err;

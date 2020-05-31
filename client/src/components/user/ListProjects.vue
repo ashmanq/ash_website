@@ -11,17 +11,18 @@
 <script>
 
 import PortfolioService from '@/services/PortfolioService';
-import ListProjectItem from '@/components/ListProjectItem';
+import ListProjectItem from '@/components/user/ListProjectItem';
 
 export default {
-  name: 'list-projects',
+  name: "list-projects",
+  props: ["type"],
   data() {
     return {
       results: null,
     }
   },
   mounted() {
-    PortfolioService.getAllCodingProjects()
+    PortfolioService.getAllProjects(this.type)
     .then(res => this.results = res);
   },
   components: {

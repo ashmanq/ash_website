@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="container">
     <div v-if="project" class="details">
-      <a v-bind:href="'/'+ project.type">Back to list</a>
+      <a v-bind:href="'/portfolio/'+ project.type">Back to list</a>
       <h1>{{ project.name }}</h1>
       <h2>Date: {{ project.date }}</h2>
       <div class="row">
-        <img v-bind:src="project.image" v-bind:alt="project.title">
+        <img v-if="project.image" v-bind:src="project.image" v-bind:alt="project.title">
         <article class="description">
           <h2>Description</h2>
           <p>{{ project.details }}</p>
@@ -31,7 +31,8 @@ export default {
   },
   mounted(){
     const id = this.$route.params.id;
-    PortfolioService.getSingleCodingProject(id)
+    const type = this.$route.params.type;
+    PortfolioService.getSingleProject(type,id)
     .then(res => this.project = res);
   },
 }
@@ -53,7 +54,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  flex:1;
 }
 
 .row{
