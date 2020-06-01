@@ -61,7 +61,7 @@ const createRouter = function(con, table) {
 
 
   // Delete an entry from the database
-  router.delete('/delete/:id', verify, (req, res) => {
+  router.delete('/:id', verify, (req, res) => {
     const id = req.params.id;
     let sql = `DELETE FROM ${table} WHERE id = ?`;
     let query = con.query(sql, id, (err, result) => {

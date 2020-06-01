@@ -12,13 +12,13 @@
 
 import PortfolioService from '@/services/PortfolioService';
 import AdminListProjectItem from '@/components/admin/AdminListProjectItem';
+import {eventBus} from '@/main.js';
 
 export default {
   name: 'admin-list-projects',
   props: ["type", "projects"],
   data() {
     return {
-
     }
   },
   components: {

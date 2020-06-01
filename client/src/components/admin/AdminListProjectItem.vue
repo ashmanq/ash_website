@@ -1,6 +1,10 @@
 <template lang="html">
-  <div v-on:click="projectSelected" class="admin-pItem">
-    <h2>{{ project.name }}</h2>
+  <div >
+    <span v-on:click="deleteProject()" class="close">&times;</span>
+    <div v-on:click="projectSelected" class="admin-pItem">
+      <h2>{{ project.name }}</h2>
+    </div>
+
   </div>
 </template>
 
@@ -14,6 +18,10 @@ export default {
   methods: {
     projectSelected: function() {
       eventBus.$emit('admin-project-selected', this.project);
+    },
+    deleteProject: function() {
+      eventBus.$emit('admin-project-delete', this.project);
+      console.log("Yo");
     }
   }
 }
@@ -31,5 +39,21 @@ export default {
 
 .admin-pItem:hover {
   cursor: pointer;
+}
+
+.close {
+  position: relative;
+  top: -1.1em;
+  right: -4em;
+  font-size: 1.7em;
+   z-index: 100;
+  /* padding: 0px;
+  margin: 0px; */
+  opacity: 0.4;
+}
+
+.close:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 </style>

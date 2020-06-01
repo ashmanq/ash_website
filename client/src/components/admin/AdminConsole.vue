@@ -21,38 +21,62 @@ export default {
     return {
       // We list project types for the filter toolbar
       projectType: [{name: "All", selected: true}, {name: "Coding"}, {name: "Drawing"}],
-      codingProjects: [],
-      drawingProjects: [],
+      portfolioProjects: [],
+      // drawingProjects: [],
       displayType: null,
     }
   },
   mounted() {
-    // Get all projects from server
+    // Get all projects from server and add to portfolioProjects
     PortfolioService.getAllProjects("coding")
-    .then(res => this.codingProjects = res);
+    .then((res) => {
+      if(res !== "err") {
+        res.forEach((project) => {
+          this.portfolioProjects.push(project);
+        });
+      };
+    });
     PortfolioService.getAllProjects("drawing")
-    .then(res => this.drawingProjects = res);
+    .then((res) => {
+      if(res !== "err") {
+        res.forEach((project) => {
+          this.portfolioProjects.push(project);
+        });
+      };
+    });
 
     // Listen for toolbar option select
     eventBus.$on('toolbar-pType', (type) => {
       this.displayType = type.toLowerCase();
-    })
+    });
+
+    // When deleting a project
+    eventBus.$on('admin-project-delete', (projectToDelete) => {
+
+      PortfolioService.deleteProject(projectToDelete.type, projectToDelete.id)
+      .then((res) => {
+        if(res !== "err") {
+          const foundIndex = this.portfolioProjects.findIndex((project) => {
+            return project == projectToDelete;
+          });
+          if(foundIndex !== -1) {
+            this.portfolioProjects.splice(foundIndex, 1);
+          }
+        }
+      });
+    });
+
   },
   computed: {
     filterProjects: function() {
-      switch (this.displayType) {
-        case "coding":
-        return this.codingProjects;
-        break;
-
-        case "drawing":
-        return this.drawingProjects;
-        break;
-
-        default:
-        return this.codingProjects.concat(this.drawingProjects);
-
+      if(!this.displayType || this.displayType === "all") {
+        return this.portfolioProjects;
       }
+      const filteredArray = this.portfolioProjects.filter((project) => {
+        return project.type === this.displayType;
+      });
+
+      return filteredArray;
     }
   },
   methods: {

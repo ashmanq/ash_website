@@ -63,6 +63,7 @@ export default {
       this.selectedProject = project;
     });
 
+    // When deleting a project
 
   },
   components: {
