@@ -5,7 +5,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 
 //Import Routes
-const userRoutes = require('./routes/userRoutes.js');
+const projectRoutes = require('./routes/projectRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 
 // Middleware
@@ -18,7 +18,9 @@ const con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  // Ensures dates are returned without timestamps
+  dateStrings: 'date'
 });
 
 // Connect to the database and create routes
@@ -26,8 +28,8 @@ con.connect((err) => {
   if(err) throw err;
 
   // We create routers for both coding and drawing projects
-  const codingRouter = userRoutes(con, 'coding');
-  const drawingRouter = userRoutes(con, 'drawing');
+  const codingRouter = projectRoutes(con, 'coding');
+  const drawingRouter = projectRoutes(con, 'drawing');
   const adminRouter = adminRoutes(con);
 
 

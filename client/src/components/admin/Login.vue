@@ -1,9 +1,10 @@
 <template lang="html">
   <div class="container">
 
-    <div action="#" class="forms" @submit.prevent="login">
+    <div action="#" @submit.prevent="login">
 
-        <form class="form" action="index.html" method="post">
+        <!-- <form class="form" action="index.html" method="post"> -->
+        <form class="form" method="post">
         <h2>Login</h2>
 
         <label for="username">Username</label>

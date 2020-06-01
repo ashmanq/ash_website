@@ -28,13 +28,10 @@ const createRouter = function(con, table) {
     });
   });
 
-  // These routes will be protected routes
-
-
+  // These routes are protected routes
 
   // Add an entry to the database
   router.post('/add', verify, (req, res) => {
-
     // Validation of project details
     const { error } = projectValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -46,6 +43,22 @@ const createRouter = function(con, table) {
       res.json(result);
     });
   });
+
+  // Update an entry in the database
+  router.put('/:id', verify, (req, res) => {
+    // Validation of project details
+    const { error } = projectValidation(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+    const id = req.params.id;
+    const entry = req.body;
+    let sql = `UPDATE ${table} SET ? WHERE id = ?`;
+    let query = con.query(sql, [entry, id], (err, result) => {
+      if(err) throw err;
+      res.json(result);
+    });
+  });
+
 
   // Delete an entry from the database
   router.delete('/delete/:id', verify, (req, res) => {

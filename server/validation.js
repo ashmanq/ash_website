@@ -36,10 +36,12 @@ const projectValidation = (data) => {
       .required(),
 
     image: Joi.string()
-      .max(255),
-
+      .max(255)
+      .allow(null),
+      
     link: Joi.string()
-      .max(255),
+      .max(255)
+      .allow(null),
 
     type: Joi.string()
     .max(255)

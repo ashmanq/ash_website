@@ -16,18 +16,18 @@ export default {
     const url = fullUrl(projectType);
     return fetch(url + id)
     .then(res => res.json())
-    .catch(err => "err")
+    .catch(res => "err")
   },
 
   addNewProject(projectType, newProject) {
-    const url = fullUrl(projectType);
+    const url = fullUrl(projectType) + "add";
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(newProject),
-      headers: { 'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json', 'auth-token': localStorage.getItem('token')}
     })
     .then(res => res.json())
-    .catch(err => "err")
+    .catch(res => res = errorHandling())
   },
 
   updateProject(projectType, id, payload) {
@@ -35,10 +35,10 @@ export default {
     return fetch(url + id, {
       method: 'PUT',
       body: JSON.stringify(payload),
-      headers: { 'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json', 'auth-token': localStorage.getItem('token')}
     })
     .then(res => res.json())
-    .catch(err => "err")
+    .catch(res => res = errorHandling())
   },
 
   deleteProject(projectType, id) {
@@ -47,7 +47,7 @@ export default {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .catch(err => "err")
+    .catch(res => res = errorHandling())
   },
 
   login(payload) {
@@ -58,7 +58,7 @@ export default {
     })
     .then(res => res.json())
     .then(res => checkAuthentication(res))
-    .catch(() => errorHandling)
+    .catch(res => res = errorHandling())
   }
 }
 

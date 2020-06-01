@@ -2,8 +2,9 @@
   <div class="container">
     <h2>Project Type</h2>
     <toolbar :options="projectType" name="pType"></toolbar>
+    <button v-on:click="addNewProject()" class="btn" type="button" name="addButton">+</button>
     <admin-list-projects :projects="filterProjects"></admin-list-projects>
-    <button class="btn" type="button" name="button" v-on:click="logout()">Logout</button>
+    <button class="btn" type="button" name="logout" v-on:click="logout()">Logout</button>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ export default {
   name: 'admin-console',
   data() {
     return {
+      // We list project types for the filter toolbar
       projectType: [{name: "All", selected: true}, {name: "Coding"}, {name: "Drawing"}],
       codingProjects: [],
       drawingProjects: [],
@@ -58,6 +60,19 @@ export default {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
       eventBus.$emit('authenticated', false);
+    },
+    addNewProject() {
+      const newProject = {
+        // id: this.project.id,
+        name: "",
+        type: "",
+        details: "",
+        date: "",
+        image: "",
+        link: "",
+      }
+      eventBus.$emit("admin-project-add", newProject);
+      console.log("Hi");
     }
   },
   components: {
