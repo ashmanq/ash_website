@@ -17,7 +17,8 @@ const sql = ` DROP TABLE IF EXISTS coding;
                 details TEXT,
                 date DATE,
                 image VARCHAR(255),
-                link VARCHAR(255)
+                link VARCHAR(255),
+                tags VARCHAR(255)
               );
               CREATE TABLE drawing (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,7 +27,9 @@ const sql = ` DROP TABLE IF EXISTS coding;
                 type VARCHAR(255),
                 date DATE,
                 image VARCHAR(255),
-                link VARCHAR(255)
+                link VARCHAR(255),
+                tags VARCHAR(255),
+                codelink VARCHAR(255)
               );`;
 
 con.connect((err) => {

@@ -3,7 +3,7 @@
       <h2>{{ project.name }}</h2>
       <!-- <p> {{ project.details }}</p> -->
       <p> {{ project.date }}</p>
-      <img v-bind:src="project.image"/>
+      <img v-if="project.img" v-bind:src="project.image"/>
   </div>
 </template>
 

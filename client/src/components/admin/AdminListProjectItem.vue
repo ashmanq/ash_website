@@ -43,7 +43,7 @@ export default {
 
 .close {
   position: relative;
-  top: -1.1em;
+  top: 2em;
   right: -4em;
   font-size: 1.7em;
    z-index: 100;

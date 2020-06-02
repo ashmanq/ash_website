@@ -37,15 +37,27 @@ const projectValidation = (data) => {
 
     image: Joi.string()
       .max(255)
+      .allow('')
       .allow(null),
-      
+
     link: Joi.string()
       .max(255)
+      .allow('')
       .allow(null),
 
     type: Joi.string()
     .max(255)
-    .required()
+    .required(),
+
+    tags: Joi.string()
+    .max(255)
+    .allow('')
+    .allow(null),
+
+    codelink: Joi.string()
+    .max(255)
+    .allow('')
+    .allow(null)
 
   });
   return schema.validate(data);

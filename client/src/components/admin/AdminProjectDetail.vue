@@ -11,7 +11,7 @@
         <input class="custom-input" type="date" name="p-date" v-model:value="date"  placeholder="yyyy-mm-dd" required>
 
         <label class="custom-input" for="details">Details</label>
-        <textarea class="custom-input" rows="10" cols="20" type="text" name="details" v-model:value="details" required>
+        <textarea class="custom-input" rows="10" cols="20" minlength="6" type="text" name="details" v-model:value="details" required>
           <!-- {{ project.details }} -->
         </textarea>
 
@@ -20,6 +20,9 @@
 
         <label class="custom-input" for="link">Link</label>
         <input class="custom-input" type="url" name="link" v-model:value="link" required>
+
+        <label class="custom-input" for="tags">Tags</label>
+        <input class="custom-input" type="text" name="tags" v-model:value="tags">
 
         <label class="custom-input" for="type">Type</label>
 
@@ -59,7 +62,8 @@ export default {
       details: "",
       image: "",
       link: "",
-      type: ""
+      type: "",
+      tags: ""
     }
   },
   mounted() {
@@ -74,6 +78,7 @@ export default {
     this.image = this.project.image;
     this.link = this.project.link;
     this.type = this.project.type;
+    this.tags = this.project.tags;
     // }
 
 
@@ -97,6 +102,7 @@ export default {
         date: this.date,
         image: this.image,
         link: this.link,
+        tags: this.tags,
       }
       if(this.addOrEdit == "add") {
         PortfolioService.addNewProject(this.type, newProject)
