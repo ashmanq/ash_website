@@ -1,9 +1,9 @@
 <template lang="html">
   <div v-on:click="selectProjectItem()" class="container">
-      <h2>{{ project.name }}</h2>
+      <h3 class="name">{{ project.name }}</h3>
       <!-- <p> {{ project.details }}</p> -->
       <p> {{ project.date }}</p>
-      <img v-if="project.img" v-bind:src="project.image"/>
+      <!-- <img v-if="project.img" v-bind:src="project.image"/> -->
   </div>
 </template>
 
@@ -34,12 +34,13 @@ export default {
 .container {
   display:flex;
   flex-direction: column;
+  flex-wrap: wrap;
   background-color: #5A33AB;
   color:#DFDFDF;
-  width: 25vw;
-  min-width: 200px;
-  margin: 20px;
-  padding: 20px;
+  width: 300px;
+  /* min-width: 25vw; */
+  margin: 1em;
+  padding: 1em;
   border-radius: 5px;
   transition: 0.5s;
 }
@@ -47,6 +48,10 @@ export default {
 .container:hover {
   background-color:#341D87;
   cursor: pointer;
+}
+
+.name {
+  font-size: 2em;
 }
 
 img{
@@ -57,5 +62,9 @@ img{
 
 a{
   color:#DFDFDF
+}
+
+@media query {
+
 }
 </style>

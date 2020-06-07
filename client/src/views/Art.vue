@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="coding-projects">
-    <h1 class="main-header">Coding Projects</h1>
-    <list-projects type="coding"></list-projects>
+  <div class="art-projects">
+    <h1 class="main-header">Art Projects</h1>
+    <list-projects type="art"></list-projects>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import ListProjects from '@/components/user/ListProjects.vue';
 
 export default {
-  name: 'coding-view',
+  name: 'art-view',
   data(){
     return {
 
@@ -22,7 +22,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.coding-projects {
+
+.art-projects {
   background: $primary-colour;
   padding: 3em;
   margin: 3em;

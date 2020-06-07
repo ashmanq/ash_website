@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="project-detail">
-    <h2>Project Details</h2>
+    <h2 class="" >Project Details</h2>
     <div class="form-container" @submit.prevent="updateDetails">
       <form class="details" method="post">
 
@@ -10,16 +10,20 @@
         <label class="custom-input" for="p-date" >Date</label>
         <input class="custom-input" type="date" name="p-date" v-model:value="date"  placeholder="yyyy-mm-dd" required>
 
-        <label class="custom-input" for="details">Details</label>
-        <textarea class="custom-input" rows="10" cols="20" minlength="6" type="text" name="details" v-model:value="details" required>
-          <!-- {{ project.details }} -->
-        </textarea>
+        <label class="custom-input" >Details</label>
+        <!-- <textarea class="custom-input" rows="10" cols="20" minlength="6" type="text" name="details" v-model:value="details" required> -->
+        <ckeditor class="editor" :editor="editor" v-model="details" @ready="onEditorReady" :config="editorConfig"></ckeditor>
+        <!-- </textarea> -->
+
 
         <label class="custom-input" for="img">Image</label>
         <input class="custom-input" type="text" name="img" v-model:value="image">
 
         <label class="custom-input" for="link">Link</label>
         <input class="custom-input" type="url" name="link" v-model:value="link" required>
+
+        <label v-if="type == 'coding'" class="custom-input" for="codelink">Code Link</label>
+        <input v-if="type == 'coding'" class="custom-input" type="url" name="codelink" v-model:value="codelink" required>
 
         <label class="custom-input" for="tags">Tags</label>
         <input class="custom-input" type="text" name="tags" v-model:value="tags">
@@ -37,11 +41,12 @@
         </div>
         <div class="row">
 
-          <input v-if="addOrEdit=='edit'" type="submit" name="" value="Update">
-          <input v-if="addOrEdit=='add'" type="submit" name="" value="Add">
+          <input v-if="addOrEdit=='edit'" class="btn" type="submit" name="" value="Update">
+          <input v-if="addOrEdit=='add'" class="btn" type="submit" name="" value="Add">
 
           <button v-on:click="confirmCancel()" class="btn" type="button" name="button">Cancel</button>
         </div>
+
       </form>
     </div>
   </div>
@@ -49,6 +54,7 @@
 
 <script>
 import moment from 'moment';
+import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 import PortfolioService from '@/services/PortfolioService.js';
 import {eventBus} from "@/main.js";
 
@@ -59,30 +65,37 @@ export default {
     return {
       name: "",
       date: null,
-      details: "",
+      // details: "",
       image: "",
       link: "",
       type: "",
-      tags: ""
+      tags: "",
+      codelink: null,
+
+      editor: InlineEditor,
+      details: "",
+      editorConfig: {
+          // The configuration of the editor.
+          removePlugins: [  'image' ],
+         toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'heading' ]
+      }
     }
   },
   mounted() {
     // If editing existing project then prefill details
     // with existing information
-    // if(this.addOrEdit === "edit") {
     if(this.project.date !== "") {
       this.date = moment(this.project.date).format("yyyy-MM-DD");
     }
     this.name = this.project.name;
-    this.details = this.project.details;
+    // this.details = this.project.details;
     this.image = this.project.image;
     this.link = this.project.link;
     this.type = this.project.type;
     this.tags = this.project.tags;
-    // }
-
-
-
+    if(this.project.type === "coding") {
+      this.codelink = this.project.codelink;
+    }
   },
   methods: {
     checkType: function(type) {
@@ -95,7 +108,6 @@ export default {
     },
     updateDetails() {
       const newProject = {
-        // id: this.project.id,
         name: this.name,
         type: this.type,
         details: this.details,
@@ -104,6 +116,11 @@ export default {
         link: this.link,
         tags: this.tags,
       }
+
+      if(this.project.type == 'coding') {
+          newProject.codelink = this.codelink;
+      }
+
       if(this.addOrEdit == "add") {
         PortfolioService.addNewProject(this.type, newProject)
         .then((res) => {
@@ -127,6 +144,9 @@ export default {
           }
         })
       }
+    },
+    onEditorReady() {
+      this.details = this.project.details;
     }
   }
 
@@ -148,10 +168,14 @@ export default {
   font-size: 1em;
 }
 
+.editor {
+  background: #383838;
+  border-radius: 5px;
+}
 .details {
   display: grid;
   justify-content: center;
-  width:40%;
+  width:80%;
   margin: auto;
   grid-template-columns: 1fr 2fr;
   grid-gap: 10px;

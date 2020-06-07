@@ -42,7 +42,6 @@ export default {
   },
 
   deleteProject(projectType, id) {
-    console.log(id);
     const url = fullUrl(projectType);
     return fetch(url + id, {
       method: 'DELETE',

@@ -25,7 +25,7 @@ export default {
     return {
       authenticated: false,
       selectedProject: null,
-      projectTypes: ["coding", "drawing"],
+      projectTypes: ["coding", "art"],
       type: null,
     }
   },

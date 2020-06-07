@@ -10,7 +10,7 @@ const con = mysql.createConnection({
 });
 
 const sql = ` DROP TABLE IF EXISTS coding;
-              DROP TABLE IF EXISTS drawing;
+              DROP TABLE IF EXISTS art;
               CREATE TABLE coding (id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255),
                 type VARCHAR(255),
@@ -20,7 +20,7 @@ const sql = ` DROP TABLE IF EXISTS coding;
                 link VARCHAR(255),
                 tags VARCHAR(255)
               );
-              CREATE TABLE drawing (
+              CREATE TABLE art (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255),
                 details TEXT,

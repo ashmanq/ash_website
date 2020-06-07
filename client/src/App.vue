@@ -2,14 +2,17 @@
   <div id="app">
     <nav>
       <router-link :to="{ name: 'home' }">Home</router-link>
-      <router-link :to="{ name: 'coding' }">Coding</router-link>
-      <router-link :to="{ name: 'drawing' }">Drawing</router-link>
+      <router-link :to="{ name: 'portfolio' }">Portfolio</router-link>
+      <router-link :to="{ name: 'contact' }">Contact</router-link>
+      <router-link :to="{ name: 'aboutme' }">About Me</router-link>
     </nav>
     <router-view id="view"></router-view>
   </div>
 </template>
 
 <script>
+
+
 
 export default {
   name: 'App',
@@ -18,22 +21,61 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@font-face {
+  font-family: comfortaa;
+  src: url('./assets/font/Comfortaa-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: firacode;
+  src: url('./assets/font/FiraCode-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+    background-color:$background-colour;
+}
 #app {
-  font-family: Helvetica, Arial, sans-serif;
+  /* font-family: Helvetica, Arial, sans-serif; */
+  font-family: 'comfortaa';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color:$font-colour;
   margin-top: 60px;
+
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: bold;
 }
 
+h2 {
+  font-size: 2.5em;
+  border-left: 6px solid purple;
+  padding-left: 0.7em;
+  // height:2.5em;
+  // color: #808080;
+}
+nav {
+  padding: 2em;
+  background: $primary-colour;
+  text-align: right;
+}
 nav a{
+  text-decoration: none;
   padding-left: 10px;
+  padding: 1em;
+  font-size: 1.5em;
+    font-weight: bold;
+  color: $font-colour;
+  background-color: $secondary-color;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  background-color: #6640e3;
 }
 
 input[type=radio]:hover {
@@ -42,19 +84,21 @@ input[type=radio]:hover {
 
 .btn{
   text-decoration: none;
+  font-weight: bold;
+  outline: none;
+  color: #D8D8D8;
   display:block;
   padding:20px;
-  font-size: 1em;
   margin: 20px;
   border-radius: 10px;
   border-style: hidden;
-  background-color: #D4BAE4;
+  background-color: #4211E3;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .btn:hover{
-  background-color: #9374BC;
+  background-color: #6640e3;
 }
 
 img{
@@ -71,22 +115,22 @@ img{
 }
 .radio-toolbar label {
   display: inline-block;
-  background-color: #f5ce42;
-  padding: 10px 20px;
-  font-family: sans-serif, Arial;
-  font-size: 16px;
-  border: 2px solid #444;
+  background-color: $secondary-color;
+  padding: 1em 1.1em;
+  font-size: 1.2em;
+  font-weight: bolder;
   border-radius: 4px;
   width: 150px;
-  color: #2C3E50;
+  color: $font-colour;
   transition: 0.2s;
 }
 .radio-toolbar input[type="radio"]:checked + label {
-  background-color: white;
-  border-color: orange;
+  background-color:white;
+  color: black;
 }
 .radio-toolbar label:hover {
   background-color: white;
+  color: black;
   cursor: pointer;
 }
 </style>

@@ -2,7 +2,7 @@
   <div >
     <span v-on:click="deleteProject()" class="close">&times;</span>
     <div v-on:click="projectSelected" class="admin-pItem">
-      <h2>{{ project.name }}</h2>
+      <h3>{{ project.name }}</h3>
     </div>
 
   </div>
@@ -33,11 +33,13 @@ export default {
   flex-direction: column;
   padding: 2em;
   margin: 1em;
-  background-color: gold;
+  background-color: #5A33AB;
   min-width: 200px;
+  transition: 0.2s;
 }
 
 .admin-pItem:hover {
+  background-color:#341D87;
   cursor: pointer;
 }
 
@@ -47,6 +49,7 @@ export default {
   right: -4em;
   font-size: 1.7em;
    z-index: 100;
+   color:black;
   /* padding: 0px;
   margin: 0px; */
   opacity: 0.4;

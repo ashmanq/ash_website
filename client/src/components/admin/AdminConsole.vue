@@ -20,9 +20,9 @@ export default {
   data() {
     return {
       // We list project types for the filter toolbar
-      projectType: [{name: "All", selected: true}, {name: "Coding"}, {name: "Drawing"}],
+      projectType: [{name: "All", selected: true}, {name: "Coding"}, {name: "Art"}],
       portfolioProjects: [],
-      // drawingProjects: [],
+      // artProjects: [],
       displayType: null,
     }
   },
@@ -36,7 +36,7 @@ export default {
         });
       };
     });
-    PortfolioService.getAllProjects("drawing")
+    PortfolioService.getAllProjects("art")
     .then((res) => {
       if(res !== "err") {
         res.forEach((project) => {
@@ -110,7 +110,6 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-content: center;
 }
 </style>

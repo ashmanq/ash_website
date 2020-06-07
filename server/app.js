@@ -27,9 +27,9 @@ const con = mysql.createConnection({
 con.connect((err) => {
   if(err) throw err;
 
-  // We create routers for both coding and drawing projects
+  // We create routers for both coding and art projects
   const codingRouter = projectRoutes(con, 'coding');
-  const drawingRouter = projectRoutes(con, 'drawing');
+  const artRouter = projectRoutes(con, 'art');
   const adminRouter = adminRoutes(con);
 
 
@@ -38,12 +38,12 @@ con.connect((err) => {
   if(process.env.SUB_URI){
     // Routes with base_uri appended
     app.use(process.env.SUB_URI + '/api/coding', codingRouter);
-    app.use(process.env.SUB_URI + '/api/drawing', drawingRouter);
+    app.use(process.env.SUB_URI + '/api/art', artRouter);
     app.use(process.env.SUB_URI + '/api/admin', adminRoute);
   } else {
     // Routes without any base_uri
     app.use('/api/coding', codingRouter);
-    app.use('/api/drawing', drawingRouter);
+    app.use('/api/art', artRouter);
     app.use('/api/admin', adminRouter);
   }
   console.log('MySQL Connected...');
