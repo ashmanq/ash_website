@@ -1,5 +1,9 @@
 <template lang="html">
-  <div class="container">
+  <div class="portfolio-container">
+    <div class="header">
+      <h1>Portfolios</h1>
+    </div>
+
     <div class="portfolios">
 
       <div v-for="(type, index) in types" :type="type" :key="index" v-on:click="selectPortfolio(type)" class="portfolio-type">
@@ -35,21 +39,46 @@ export default {
 
 <style lang="scss" scoped>
 
-.container {
+.portfolio-container {
   display: flex;
   flex-direction: column;
+  // align-items: center;
+  background-color: $primary-colour;
+  color:#DFDFDF;
+  padding: 3em;
+  margin: 3em;
+  border-radius: 0.8em;
+  text-align: left;
 }
 
 .portfolio-type {
   padding: 2em;
-  background: $primary-colour;
+  margin: 2em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-radius: 1em;
+  background: $secondary-color;
 }
 
 .portfolio-type h2 {
   border-left: unset;
 }
 
-.portfolio-type h2:hover {
+.portfolio-type:hover {
+  background: $secondary-color-hover;
   cursor: pointer;
+}
+
+.portfolios {
+  margin-top: 4em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+
 }
 </style>

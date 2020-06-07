@@ -30,23 +30,22 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .container {
   display:flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: #5A33AB;
+  background-color: $secondary-color;
   color:#DFDFDF;
   width: 300px;
-  /* min-width: 25vw; */
   margin: 1em;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 1em;
   transition: 0.5s;
 }
 
 .container:hover {
-  background-color:#341D87;
+  background-color: $secondary-color-hover;
   cursor: pointer;
 }
 

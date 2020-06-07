@@ -56,11 +56,11 @@ export default {
 }
 
 .intro-text{
-  width:70%;
+  width:80%;
   background:#2F2F2F;
   padding: 4em;
   margin-top: 4em;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
 }
 
 .intro-what {

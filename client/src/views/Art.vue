@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="art-projects">
-    <h1 class="main-header">Art Projects</h1>
+    <div class="main-header">
+      <h1>Art Projects</h1>
+    </div>
+
     <list-projects type="art"></list-projects>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="container">
-    <a v-bind:href="'/portfolio/'+ project.type">Back to list</a>
-    <h1 class="main-header">Portfolio</h1>
+    <a class="breadcrumb" v-bind:href="'/portfolio/'+ project.type"><- Back to list</a>
+    <!-- <h1 class="main-header">Portfolio</h1> -->
     <div v-if="project" class="information">
 
       <div class="grid-item">
@@ -114,7 +114,10 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:center;
+  background: $primary-colour;
+  width:80%;
+  margin: 4em auto 0 auto;
 }
 
 .information {
@@ -183,6 +186,11 @@ export default {
   padding: 0.6em;
   background-color: $secondary-color;
   border-radius: 10px;
+}
+
+.breadcrumb {
+  text-align: left;
+  margin-right: auto;
 }
 
 </style>

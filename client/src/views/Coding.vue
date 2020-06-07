@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="coding-projects">
-    <h1 class="main-header">Coding Projects</h1>
+    <div class="main-header">
+      <h1>Coding Projects</h1>
+    </div>
+
     <list-projects type="coding"></list-projects>
   </div>
 </template>

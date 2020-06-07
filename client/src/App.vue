@@ -1,26 +1,54 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link :to="{ name: 'home' }">Home</router-link>
-      <router-link :to="{ name: 'portfolio' }">Portfolio</router-link>
-      <router-link :to="{ name: 'contact' }">Contact</router-link>
-      <router-link :to="{ name: 'aboutme' }">About Me</router-link>
-    </nav>
+    <div class="row">
+      <img v-on:click="takeToHomePage" class="logo" src="/ashqurlogo.svg" alt="AshQur">
+
+      <nav>
+        <!-- <router-link id="home" :to="{ name: 'home' }">Home</router-link> -->
+        <router-link :to="{ name: 'portfolio' }">Portfolio</router-link>
+        <router-link :to="{ name: 'contact' }">Contact</router-link>
+        <router-link :to="{ name: 'aboutme' }">About Me</router-link>
+      </nav>
+    </div>
+
     <router-view id="view"></router-view>
   </div>
 </template>
 
 <script>
 
-
+import {eventBus} from '@/main.js';
 
 export default {
   name: 'App',
-  components: {
+  data() {
+    return {
+      navSelected: "home"
+    }
+  },
+  methods: {
+    takeToHomePage: function() {
+      window.location.href = `/`;
+    }
   }
 }
 </script>
+<style lang="scss"  scoped>
+  .row {
+    display: flex;
+  }
+  .logo {
+    text-decoration:none;
+    height:4em;
+    background: $secondary-color;
+    border-radius: 0;
+    padding: 1em;
+  }
 
+  .logo:hover {
+    cursor: pointer;
+  }
+</style>
 <style lang="scss">
 @font-face {
   font-family: comfortaa;
@@ -42,9 +70,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color:$font-colour;
-  margin-top: 60px;
 
 }
+
 
 h1 {
   font-size: 3.5rem;
@@ -59,25 +87,30 @@ h2 {
   // color: #808080;
 }
 nav {
-  padding: 2em;
-  background: $primary-colour;
+  padding: 1em;
+  background: $secondary-color;
+  width: 100%;
   text-align: right;
 }
 nav a{
   text-decoration: none;
-  padding-left: 10px;
-  padding: 1em;
-  font-size: 1.5em;
-    font-weight: bold;
+  margin-left: 2em;
+  padding: .5em;
+  font-size: 1.8em;
+  font-weight: bold;
   color: $font-colour;
   background-color: $secondary-color;
   transition: 0.2s;
 }
 
 nav a:hover {
-  background-color: #6640e3;
+  // background-color: $secondary-color-hover;
+  color: $secondary-color-hover;
 }
 
+.router-link-active {
+  color:$font-colour-secondary;
+}
 input[type=radio]:hover {
   cursor: pointer;
 }
@@ -132,5 +165,17 @@ img{
   background-color: white;
   color: black;
   cursor: pointer;
+}
+
+.breadcrumb {
+  font-size: 1.5em;
+  text-decoration:none;
+  color: $font-colour;
+  padding: 1em;
+}
+
+.breadcrumb:hover {
+  cursor: pointer;
+  color: $font-colour-secondary;
 }
 </style>
