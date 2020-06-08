@@ -12,7 +12,11 @@
     </div>
 
     <router-view id="view"></router-view>
+
+    <footer>&copy; Ashir Qureshi {{getCurrentYear()}}</footer>
   </div>
+
+
 </template>
 
 <script>
@@ -29,17 +33,27 @@ export default {
   methods: {
     takeToHomePage: function() {
       window.location.href = `/`;
+    },
+    getCurrentYear: function() {
+      return new Date().getFullYear();
     }
   }
 }
 </script>
+
+
 <style lang="scss"  scoped>
   .row {
     display: flex;
+    justify-content:center;
+    background: $secondary-color;
+    border-style: none;
+    // width:100%
   }
   .logo {
     text-decoration:none;
-    height:4em;
+    // height:4em;
+    height:1.3em;
     background: $secondary-color;
     border-radius: 0;
     padding: 1em;
@@ -49,6 +63,8 @@ export default {
     cursor: pointer;
   }
 </style>
+
+
 <style lang="scss">
 @font-face {
   font-family: comfortaa;
@@ -61,11 +77,13 @@ export default {
 }
 
 body {
-    background-color:$background-colour;
+    background-color:$primary-colour;
+    // border-style: solid;
+    margin: 0;
 }
 #app {
   /* font-family: Helvetica, Arial, sans-serif; */
-  font-family: 'comfortaa';
+  font-family: $primary-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -83,20 +101,17 @@ h2 {
   font-size: 2.5em;
   border-left: 6px solid purple;
   padding-left: 0.7em;
-  // height:2.5em;
-  // color: #808080;
 }
 nav {
   padding: 1em;
   background: $secondary-color;
-  width: 100%;
   text-align: right;
 }
 nav a{
   text-decoration: none;
   margin-left: 2em;
   padding: .5em;
-  font-size: 1.8em;
+  font-size: 1.3em;
   font-weight: bold;
   color: $font-colour;
   background-color: $secondary-color;
@@ -104,8 +119,8 @@ nav a{
 }
 
 nav a:hover {
-  // background-color: $secondary-color-hover;
-  color: $secondary-color-hover;
+  // color: $font-hover-color;
+  color: $font-colour-secondary;
 }
 
 .router-link-active {
@@ -131,7 +146,9 @@ input[type=radio]:hover {
 }
 
 .btn:hover{
-  background-color: #6640e3;
+  // background-color: #6640e3;
+  background-color: $secondary-color-hover;
+  color:$font-colour-secondary;
 }
 
 img{
@@ -177,5 +194,11 @@ img{
 .breadcrumb:hover {
   cursor: pointer;
   color: $font-colour-secondary;
+}
+
+footer {
+  width: 100vw;
+  background: $footer-colour;
+  padding:3em;
 }
 </style>

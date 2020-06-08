@@ -65,10 +65,12 @@ export default {
 
 .portfolio-type h2 {
   border-left: unset;
+  transition: 0.2s;
 }
 
 .portfolio-type:hover {
   background: $secondary-color-hover;
+  color:$font-colour-secondary;
   cursor: pointer;
 }
 
