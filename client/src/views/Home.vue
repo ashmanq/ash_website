@@ -3,21 +3,21 @@
     <window-title-bar class="title-bar"></window-title-bar>
     <div class="intro-text">
 
-      <!-- <h3 class="welcome-text">Welcome to AshQur.co.uk!</h3> -->
       <h3 class="name">Ashir Qureshi</h3>
       <p class="typed-word"><span>&rarr; </span>{{ typedWord }}<span class="cursor">i</span></p>
-      <!-- <p class="intro-what">I strive to create beautiful experiences</p> -->
-      <button v-on:click="gotoPortfolio" class="btn startbtn" type="button" name="button">Portfolio</button>
+      <router-link :to="{ name: 'portfolio' }">
+          <button class="btn startbtn" type="button" name="button">Portfolio</button>
+      </router-link>
+      <!-- <button v-on:click="gotoPortfolio" class="btn startbtn" type="button" name="button">Portfolio</button> -->
     </div>
     <message-box v-if="showPopup"></message-box>
-    <!-- <button v-on:click="popup" type="button" name="button">Show Popup</button> -->
+
   </div>
 </template>
 
 <script>
 
 import MessageBox from '@/components/MessageBox.vue';
-import WindowTitleBar from '@/components/WindowTitleBar'
 import {eventBus} from '@/main.js';
 
 export default {
@@ -43,9 +43,9 @@ export default {
     popup: function() {
       this.showPopup = true;
     },
-    gotoPortfolio: function() {
-        window.location.href = `/portfolio/`;
-    },
+    // gotoPortfolio: function() {
+    //     window.location.href = `/portfolio/`;
+    // },
     async typeWriter(wordsToBeTyped) {
       const interval = Math.random() * (90 - 40) + 40 // Math.random() * (max- min) + min
 
@@ -63,7 +63,6 @@ export default {
   },
   components: {
     'message-box' : MessageBox,
-    'window-title-bar': WindowTitleBar,
   }
 }
 </script>
@@ -72,6 +71,8 @@ export default {
 span {
   color:$secondary-color;
 }
+
+
 .typed-word {
   font-family: $secondary-font;
   font-size: 2.5em;

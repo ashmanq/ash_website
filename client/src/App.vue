@@ -1,17 +1,23 @@
 <template>
   <div id="app">
     <div class="row">
-      <img v-on:click="takeToHomePage" class="logo" src="/ashqurlogo.svg" alt="AshQur">
+      <router-link :to="{ name: 'home' }">
+        <img class="logo" src="/ashqurlogo.svg" alt="AshQur">
+      </router-link>
 
       <nav>
         <!-- <router-link id="home" :to="{ name: 'home' }">Home</router-link> -->
-        <router-link :to="{ name: 'portfolio' }">Portfolio</router-link>
+        <router-link :to="{ name: 'portfolio' }">Portfolios</router-link>
         <router-link :to="{ name: 'contact' }">Contact</router-link>
         <router-link :to="{ name: 'aboutme' }">About Me</router-link>
       </nav>
     </div>
+    <transition name="fade" mode="out-in">
 
-    <router-view id="view"></router-view>
+      <router-view id="view"></router-view>
+
+    </transition>
+
 
     <footer>&copy; Ashir Qureshi {{getCurrentYear()}}</footer>
   </div>
@@ -21,6 +27,7 @@
 
 <script>
 
+import WindowTitleBar from '@/components/WindowTitleBar';
 import {eventBus} from '@/main.js';
 
 export default {
@@ -31,12 +38,15 @@ export default {
     }
   },
   methods: {
-    takeToHomePage: function() {
-      window.location.href = `/`;
-    },
+    // takeToHomePage: function() {
+    //   window.location.href = `/`;
+    // },
     getCurrentYear: function() {
       return new Date().getFullYear();
     }
+  },
+  components: {
+    'window-title-bar': WindowTitleBar,
   }
 }
 </script>
@@ -62,6 +72,18 @@ export default {
   .logo:hover {
     cursor: pointer;
   }
+
+  .fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
 </style>
 
 
@@ -81,12 +103,34 @@ body {
     // border-style: solid;
     margin: 0;
 }
+
+a {
+  text-decoration: none;
+}
+
+.window {
+    background: $background-colour;
+    border-radius: 2em 2em 0 0;
+    margin: 2em;
+    padding-bottom: 2em;
+}
+
+.window-header {
+  text-align: left;
+  margin-left: 2em;
+}
+
+.container {
+  width:80%;
+  margin: auto;
+}
+
 #app {
   /* font-family: Helvetica, Arial, sans-serif; */
   font-family: $primary-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color:$font-colour;
 
 }
@@ -197,8 +241,8 @@ img{
 }
 
 footer {
-  width: 100vw;
   background: $footer-colour;
   padding:3em;
+  text-align: center;
 }
 </style>

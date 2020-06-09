@@ -1,31 +1,35 @@
 <template lang="html">
   <div class="container">
-    <a class="breadcrumb" v-bind:href="'/portfolio/'+ project.type"><- Back to list</a>
-    <!-- <h1 class="main-header">Portfolio</h1> -->
-    <div v-if="project" class="information">
+    <div class="window">
+      <window-title-bar></window-title-bar>
+      <router-link :to="{ name: project.type}">
+      <p class="breadcrumb"><- Back to list</p>
+      </router-link>
+      <div v-if="project" class="information">
 
-      <div class="grid-item">
-        <h2 class="header">{{ name }}</h2>
-        <h3 class="date">Date: {{ date }}</h3>
-      </div>
-
-      <div class="grid-buttons">
-        <a v-if="project.link" v-bind:href="project.link" class="btn" type="button" name="button">View Project</a>
-        <a v-if="project.codelink" v-bind:href="project.codelink" class="btn" type="button" name="button">View Code</a>
-      </div>
-
-      <article class="grid-item details" v-html="details">
-        <!-- <p class="details">{{ details }}</p> -->
-      </article>
-
-      <div class="grid-item">
-        <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
-        <div class="row">
-          <div class="tags" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
+        <div class="grid-item">
+          <h2 class="header">{{ name }}</h2>
+          <h3 class="date">Date: {{ date }}</h3>
         </div>
-      </div>
 
+        <div class="grid-buttons">
+          <a v-if="project.link" v-bind:href="project.link" class="btn" type="button" name="button">View Project</a>
+          <a v-if="project.codelink" v-bind:href="project.codelink" class="btn" type="button" name="button">View Code</a>
+        </div>
+
+        <article class="grid-item details" v-html="details">
+        </article>
+
+        <div class="grid-item">
+          <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
+          <div class="row">
+            <div class="tags" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -82,46 +86,29 @@ export default {
 </script>
 <style lang="css">
 
-.details h3 {
+/* .details h3 {
   font-size: 1.6em;
   margin-bottom: 0.2em;
   border-left: 6px solid purple;
   padding-left: 0.7em;
   height:1.2em;
-}
-/* My attempt at using animations for the text */
-/* .details p {
-  white-space: nowrap;
-  overflow: hidden;
-  width: 30em;
-  animation:
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite;
-}
-
-@keyframes typing{
-  from { width: 0 }
-  to {width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
 } */
+
 </style>
 <style lang="scss" scoped>
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items:center;
-  background: $primary-colour;
-  width:80%;
-  margin: 4em auto 0 auto;
-}
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items:center;
+//   background: $primary-colour;
+//   width:80%;
+//   margin: 4em auto 0 auto;
+// }
 
 .information {
   max-width: 80%;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row: auto;
@@ -189,8 +176,8 @@ export default {
 }
 
 .breadcrumb {
-  text-align: left;
-  margin-right: auto;
+  display: block;
+  margin-top: 1em;
 }
 
 </style>

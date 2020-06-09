@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="title-bar">
     <div class="row">
-      <span class="close">X</span>
+      <span class="close"></span>
     </div>
     <div class="contents">
 
@@ -24,12 +24,14 @@ export default {
 
 .title-bar {
   display: flex;
-  background-color: $secondary-color;
+  // background-color: $secondary-color;
+  background:#474663;
   height: 1.4em;
   border-style: solid;
   border-width: 2px;
-  border-color: $secondary-color-hover;
-  border-radius: 15px 15px 0 0;
+  // border-color: $secondary-color-hover;
+  border-color: #474663;
+  border-radius: 10px 10px 0 0;
 }
 
 .row {
@@ -39,7 +41,7 @@ export default {
 }
 
 .close {
-  padding:0.2em;
+  padding:0.2em 0.9em;
   margin-right: 1.5em;
   border-radius: 0.2em;
   background-color: $warning-color;

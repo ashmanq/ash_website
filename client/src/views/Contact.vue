@@ -1,22 +1,28 @@
 <template lang="html">
   <div class="container">
-    <h1>Contact Me</h1>
+    <div class="window">
+      <window-title-bar></window-title-bar>
+      <div class="window-header">
+        <h1>Contact Me</h1>
+      </div>
 
-    <div class="container">
-      <form class="form" action="index.html" method="post">
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="" required>
+      <div class="container">
+        <form class="form" action="index.html" method="post">
+          <label for="name">Name:</label>
+          <input type="text" name="name" value="" required>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="" required>
+          <label for="email">Email:</label>
+          <input type="email" name="email" value="" required>
 
-        <label for="message">Message:</label>
-        <textarea name="message" rows="8" cols="80" required></textarea>
-        <label for=""></label>
-        <input id="sub-btn" class="btn" type="submit" name="submit" value="submit">
-      </form>
+          <label for="message">Message:</label>
+          <textarea name="message" rows="8" cols="80" required></textarea>
+          <label for=""></label>
+          <input id="sub-btn" class="btn" type="submit" name="submit" value="submit">
+        </form>
 
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -28,15 +34,10 @@ export default {
 
 <style lang="scss" scoped>
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
 
 .form {
   display: grid;
   align-self: center;
-  width: 50%;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: auto;
 }
