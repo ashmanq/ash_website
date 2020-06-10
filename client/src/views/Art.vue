@@ -3,6 +3,7 @@
     <div class="window">
           <window-title-bar></window-title-bar>
       <div class="window-header">
+        <router-link :to="{ name: 'portfolio' }"><p class="breadcrumb">&larr; Portfolios</p></router-link>
         <h1>Art Projects</h1>
       </div>
       <list-projects type="art"></list-projects>

@@ -1,8 +1,9 @@
 <!--  This component will be used to list all projects -->
 <template lang="html">
   <div class="container">
-    <list-project-item v-if="results" v-for="(project, index) in results" :project="project" :key="index" ></list-project-item>
-    <p v-if="!results">
+    <loading-animation v-if="!loaded"></loading-animation>
+    <list-project-item v-if="results && results!='err'" v-for="(project, index) in results" :project="project" :key="index" ></list-project-item>
+    <p class="warning-msg" v-if="results=='err'">
       There was an issue loading this list!
     </p>
   </div>
@@ -18,12 +19,16 @@ export default {
   props: ["type"],
   data() {
     return {
+      loaded: false,
       results: null,
     }
   },
   mounted() {
     PortfolioService.getAllProjects(this.type)
-    .then(res => this.results = res);
+    .then((res) => {
+      this.results = res;
+      this.loaded = true;
+    });
   },
   components: {
     'list-project-item': ListProjectItem,

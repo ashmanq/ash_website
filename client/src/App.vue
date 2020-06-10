@@ -1,21 +1,20 @@
 <template>
   <div id="app">
+
     <div class="row">
       <router-link :to="{ name: 'home' }">
         <img class="logo" src="/ashqurlogo.svg" alt="AshQur">
       </router-link>
 
       <nav>
-        <!-- <router-link id="home" :to="{ name: 'home' }">Home</router-link> -->
         <router-link :to="{ name: 'portfolio' }">Portfolios</router-link>
         <router-link :to="{ name: 'contact' }">Contact</router-link>
         <router-link :to="{ name: 'aboutme' }">About Me</router-link>
       </nav>
     </div>
+
     <transition name="fade" mode="out-in">
-
       <router-view id="view"></router-view>
-
     </transition>
 
 
@@ -34,13 +33,16 @@ export default {
   name: 'App',
   data() {
     return {
-      navSelected: "home"
+      loaded: false,
+
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+        this.loaded = true;
+    })
+  },
   methods: {
-    // takeToHomePage: function() {
-    //   window.location.href = `/`;
-    // },
     getCurrentYear: function() {
       return new Date().getFullYear();
     }
@@ -106,6 +108,11 @@ body {
 
 a {
   text-decoration: none;
+}
+
+.warning-msg {
+    color:$warning-color;
+    font-size: 1.4em;
 }
 
 .window {
@@ -239,6 +246,17 @@ img{
   cursor: pointer;
   color: $font-colour-secondary;
 }
+
+.breadcrumb {
+  text-transform: capitalize;
+  color: $font-colour;
+  font-size: 1.3em;
+}
+
+.breadcrumb:hover {
+  color: $font-colour-secondary;
+}
+
 
 footer {
   background: $footer-colour;

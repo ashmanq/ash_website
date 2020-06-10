@@ -1,9 +1,13 @@
 <template lang="html">
-  <div v-on:click="selectProjectItem()" class="container">
-      <h3 class="name">{{ project.name }}</h3>
-      <!-- <p> {{ project.details }}</p> -->
-      <p> {{ project.date }}</p>
-      <!-- <img v-if="project.img" v-bind:src="project.image"/> -->
+
+  <!-- <div v-on:click="selectProjectItem()" class="container"> -->
+  <div class="">
+    <router-link :to="'/portfolio/'+ project.type + '/' + project.id">
+      <div class="container">
+        <h3 class="name">{{ project.name }}</h3>
+        <p> {{ project.date }}</p>
+      </div>
+    </router-link>
   </div>
 </template>
 

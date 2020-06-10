@@ -2,6 +2,7 @@
   <div class="container">
     <div class="window">
       <window-title-bar></window-title-bar>
+      <loading-animation v-if="!loaded"></loading-animation>
       <div class="window-header">
         <h1>Portfolios</h1>
       </div>
@@ -43,6 +44,7 @@ export default {
   name: 'porfolio',
   data() {
     return {
+      loaded: false,
       types: [
         {
           name: 'coding',
@@ -55,6 +57,9 @@ export default {
       ],
 
     }
+  },
+  mounted() {
+    this.loaded = true;
   },
   methods: {
     selectPortfolio: function(type){

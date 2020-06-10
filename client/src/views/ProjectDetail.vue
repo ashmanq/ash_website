@@ -1,10 +1,13 @@
 <template lang="html">
   <div class="container">
+
     <div class="window">
       <window-title-bar></window-title-bar>
-      <router-link :to="{ name: project.type}">
-      <p class="breadcrumb"><- Back to list</p>
+      <loading-animation v-if="!loaded"></loading-animation>
+      <router-link v-if="loaded" :to="{ name: project.type}">
+      <p class="breadcrumb">&larr; {{ project.type }} Projects</p>
       </router-link>
+
       <div v-if="project" class="information">
 
         <div class="grid-item">
@@ -42,6 +45,7 @@ export default {
   name: 'project-detail',
   data(){
     return{
+      loaded: false,
       project: "",
       name: "",
       date: "",
@@ -72,8 +76,10 @@ export default {
         if(type==="coding") {
           this.codelink = res.codelink;
         }
+        this.loaded = true;
       } catch (e) {
         console.log(e);
+        this.loaded = true;
       }
     });
   },
