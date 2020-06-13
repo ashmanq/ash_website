@@ -152,24 +152,30 @@ export default {
       if(this.addOrEdit == "add") {
         PortfolioService.addNewProject(this.type, newProject)
         .then((res) => {
-          if(res == "err") {
-            console.log("Error updating project");
+          if(res.error) {
             this.message = "Error updating project";
-            // eventBus.$emit('authenticated', false);
+
+            if(res.error == "Invalid Token") {
+              localStorage.removeItem('user', res.user);
+              localStorage.dremoveItem('token', res.token);
+              eventBus.$emit('authenticated', false);
+            }
+
           } else {
-            console.log("Added successfully");
             eventBus.$emit('cancel-project-selected');
           }
         })
       } else if(this.addOrEdit == "edit") {
         PortfolioService.updateProject(this.type, this.project.id, newProject)
         .then((res) => {
-          if(res == "err") {
-            console.log("Error updating project");
+          if(res.error) {
             this.message = "Error updating project";
-            // eventBus.$emit('authenticated', false);
+            if(res.error == "Invalid Token") {
+              localStorage.removeItem('user', res.user);
+              localStorage.removeItem('token', res.token);
+              eventBus.$emit('authenticated', false);
+            }
           } else {
-            console.log("Updated successfully");
             eventBus.$emit('cancel-project-selected');
           }
         })

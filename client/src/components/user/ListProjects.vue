@@ -17,6 +17,7 @@
 <script>
 
 import PortfolioService from '@/services/PortfolioService';
+import Helpers from '@/services/Helpers.js';
 import ListProjectItem from '@/components/user/ListProjectItem';
 
 export default {
@@ -29,11 +30,21 @@ export default {
     }
   },
   mounted() {
-    PortfolioService.getAllProjects(this.type)
-    .then((res) => {
-      this.results = res;
-      this.loaded = true;
-    });
+    if(this.type == "featured") {
+      // Get all featured projects from server and add to portfolioProjects
+      Helpers.getAllFeaturedProjects()
+      .then((res) => {
+        this.results = res;
+        this.loaded = true;
+      })
+    } else {
+      PortfolioService.getAllProjects(this.type)
+      .then((res) => {
+        this.results = res;
+        this.loaded = true;
+      });
+    }
+
   },
   components: {
     'list-project-item': ListProjectItem,
@@ -41,23 +52,12 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding-top: 1em;
   }
-/* 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition-duration: 0.5s;
-    transition-property: opacity;
-    transition-timing-function: ease;
-  }
-
-  .fade-enter,
-  .fade-leave-active {
-    opacity: 0
-  } */
 
 </style>

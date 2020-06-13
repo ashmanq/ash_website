@@ -1,14 +1,22 @@
 <template lang="html">
   <div class="container">
-    <window-title-bar class="title-bar"></window-title-bar>
-    <div class="intro-text">
+    <div class="window">
+      <window-title-bar class="title-bar" title="Welcome"></window-title-bar>
+      <div class="intro-text">
 
-      <h3 class="name">Ashir Qureshi</h3>
-      <p class="typed-word"><span>&rarr; </span>{{ typedWord }}<span class="cursor">i</span></p>
-      <router-link :to="{ name: 'portfolio' }">
-          <button class="btn startbtn" type="button" name="button">Portfolio</button>
-      </router-link>
+        <h3 class="name">Ashir Qureshi</h3>
+        <p class="typed-word"><span>&rarr; </span>{{ typedWord }}<span class="cursor">i</span></p>
+        <router-link :to="{ name: 'portfolio' }">
+            <button class="btn startbtn" type="button" name="button">Portfolio</button>
+        </router-link>
 
+      </div>
+    </div>
+
+    <div class="window">
+      <window-title-bar class="title-bar" title="Featured Projects"></window-title-bar>
+
+      <list-projects type="featured"></list-projects>
     </div>
     <message-box v-if="showPopup"></message-box>
 
@@ -18,6 +26,7 @@
 <script>
 
 import MessageBox from '@/components/MessageBox.vue';
+import ListProjects from '@/components/user/ListProjects.vue';
 import {eventBus} from '@/main.js';
 
 export default {
@@ -65,6 +74,7 @@ export default {
   },
   components: {
     'message-box' : MessageBox,
+    'list-projects': ListProjects
   }
 }
 </script>
@@ -87,20 +97,11 @@ span {
   background: $secondary-color;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  margin:auto;
-  align-items: center;
-  width:70%;
-  align-items: stretch;
-  padding: 2em;
-}
 
 .name {
   text-align: left;
   font-size: 1.6em;
-  margin-top: 3.5em;
+  margin-top: 1em;
 }
 
 .intro-text{

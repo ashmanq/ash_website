@@ -17,6 +17,15 @@ const createRouter = function(con, table) {
     });
   });
 
+  // Get featured entries in the database
+  router.get('/featured', (req, res) => {
+    con.query(`SELECT * FROM ${table} WHERE featured = true`, function(err, result) {
+      if(err) throw err;
+      res.json(result);
+    });
+  });
+
+
   // Find an existing entry in the database using it's id
   router.get('/:id', (req, res) => {
     const id = req.params.id;

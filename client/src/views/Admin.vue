@@ -52,7 +52,6 @@ export default {
     eventBus.$on('authenticated', (isAutheticated) => {
       if(!isAutheticated) {
         this.authenticated = false;
-        // this.selectedProject = null;
       } else if(isAutheticated) {
         this.authenticated = true;
       }

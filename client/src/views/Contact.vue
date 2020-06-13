@@ -1,10 +1,7 @@
 <template lang="html">
   <div class="container">
     <div class="window">
-      <window-title-bar></window-title-bar>
-      <div class="window-header">
-        <h1>Contact Me</h1>
-      </div>
+      <window-title-bar title="Contact Me"></window-title-bar>
 
       <div class="container">
         <form class="form" action="index.html" method="post">
@@ -40,6 +37,7 @@ export default {
   align-self: center;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: auto;
+  padding-top: 3em;
 }
 .form label {
   font-size: 1.5em;

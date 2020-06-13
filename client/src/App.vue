@@ -115,14 +115,14 @@ a {
 
 .window {
     background: $background-colour;
-    border-radius: 2em 2em 0 0;
-    margin: 2em;
-    padding-bottom: 2em;
+    border-radius: 12px 12px 0 0;
+    margin: 20px;
+    padding-bottom: 20px;
 }
 
 .window-header {
   text-align: left;
-  margin-left: 2em;
+  margin-left: 20px;
 }
 
 .container {
@@ -238,6 +238,7 @@ img{
   text-decoration:none;
   color: $font-colour;
   padding: 1em;
+  transition: 0.2s;
 }
 
 .breadcrumb:hover {

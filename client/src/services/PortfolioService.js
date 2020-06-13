@@ -1,6 +1,5 @@
 const dotenv = require('dotenv').config();
 const baseUrl = process.env.VUE_APP_API_URL;
-// const codingUrl = apiUrl + 'coding/';
 const adminUrl = baseUrl + 'admin/';
 
 export default {
@@ -9,14 +8,21 @@ export default {
     const url = fullUrl(projectType);
     return fetch(url)
     .then(res => res.json())
-    .catch(err => "err")
+    .catch(res => res.json())
+  },
+
+  getFeaturedProjects(projectType) {
+    const url = fullUrl(projectType);
+    return fetch(url)
+    .then(res => res.json())
+    .catch(res => res.json())
   },
 
   getSingleProject(projectType, id) {
     const url = fullUrl(projectType);
     return fetch(url + id)
     .then(res => res.json())
-    .catch(res => "err")
+    .catch(res => res.json())
   },
 
   addNewProject(projectType, newProject) {
@@ -27,7 +33,7 @@ export default {
       headers: { 'Content-Type': 'application/json', 'auth-token': localStorage.getItem('token')}
     })
     .then(res => res.json())
-    .catch(res => res = errorHandling())
+    .catch(res => res.json())
   },
 
   updateProject(projectType, id, payload) {
@@ -38,7 +44,8 @@ export default {
       headers: { 'Content-Type': 'application/json', 'auth-token': localStorage.getItem('token')}
     })
     .then(res => res.json())
-    .catch(res => res = errorHandling())
+    .catch(res => res.json())
+
   },
 
   deleteProject(projectType, id) {
@@ -48,7 +55,7 @@ export default {
       headers: { 'auth-token': localStorage.getItem('token')}
     })
     .then(res => res.json())
-    .catch(res => res = errorHandling())
+    .catch(res => res.json())
   },
 
   login(payload) {
@@ -59,7 +66,7 @@ export default {
     })
     .then(res => res.json())
     .then(res => checkAuthentication(res))
-    .catch(res => res = errorHandling())
+    .catch(res => res.json())
   }
 }
 
@@ -75,8 +82,7 @@ const checkAuthentication = function(res) {
   return res;
 }
 
-const errorHandling = function() {
-  // localStorage.removeItem('user');
-  // localStorage.removeItem('token');
+const errorHandling = function(res) {
+  console.log("Yo!");
   return "err";
 }

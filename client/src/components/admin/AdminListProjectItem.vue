@@ -21,7 +21,6 @@ export default {
     },
     deleteProject: function() {
       eventBus.$emit('admin-project-delete', this.project);
-      console.log("Yo");
     }
   }
 }

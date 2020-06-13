@@ -1,12 +1,8 @@
 <template lang="html">
   <div class="container">
     <div class="window">
-      <window-title-bar></window-title-bar>
+      <window-title-bar title="Portfolios"></window-title-bar>
       <loading-animation v-if="!loaded"></loading-animation>
-
-      <div class="window-header">
-        <h1>Portfolios</h1>
-      </div>
 
       <div class="portfolios">
         <div class="portfolio-type">
@@ -95,6 +91,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 2em;
 
 }
 

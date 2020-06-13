@@ -2,10 +2,8 @@
   <div class="container">
 
     <div class="window">
-      <window-title-bar></window-title-bar>
-      <div class="window-header">
-        <h1>About Me</h1>
-      </div>
+      <window-title-bar title="About Me"></window-title-bar>
+      
       <div class="about-me-details">
           <img class="about-me-image" src="/ashqurlogo.svg" alt="Logo">
         <h3>Ashir Qureshi</h3>
