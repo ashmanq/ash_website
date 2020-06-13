@@ -1,12 +1,24 @@
 <template lang="html">
   <div class="container">
-    <h1>Administration Page</h1>
+    <div class="window">
+      <window-title-bar></window-title-bar>
+      <div class="window-header">
+          <h1>Administration</h1>
+      </div>
+      <transition name="fade" mode="out-in">
+        <login v-if="!authenticated"></login>
+      </transition>
 
-    <login v-if="!authenticated"></login>
+      <div v-if="authenticated">
+        <transition name="fade" mode="out-in">
+          <admin-console v-if="!selectedProject"></admin-console>
+        </transition>
+        <transition name="fade" mode="out-in">
+          <admin-project-details v-if="selectedProject" :project="selectedProject" :types="projectTypes" :addOrEdit="type"></admin-project-details>
+        </transition>
+      </div>
 
-    <div v-if="authenticated">
-      <admin-console v-if="!selectedProject"></admin-console>
-      <admin-project-details v-if="selectedProject" :project="selectedProject" :types="projectTypes" :addOrEdit="type"></admin-project-details>
+
     </div>
 
   </div>
@@ -74,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 h1 {
   margin-bottom: 2em;
 }

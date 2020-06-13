@@ -2,9 +2,9 @@
   <div class="container">
     <h2>Project Type</h2>
     <toolbar :options="projectType" name="pType"></toolbar>
-    <button v-on:click="addNewProject()" class="btn" type="button" name="addButton">+</button>
+    <button v-on:click="addNewProject()" class="btn admn-btn" type="button" name="addButton">+</button>
     <admin-list-projects :projects="filterProjects"></admin-list-projects>
-    <button class="btn" type="button" name="logout" v-on:click="logout()">Logout</button>
+    <button class="btn admn-btn" type="button" name="logout" v-on:click="logout()">Logout</button>
   </div>
 </template>
 
@@ -111,5 +111,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: center;
+  justify-content: center;
+  align-items: center;
 }
+
+.admn-btn {
+  font-size: 2em;
+  margin: 1.2em 0;
+  width:200px;
+}
+
 </style>

@@ -8,7 +8,7 @@
       <router-link :to="{ name: 'portfolio' }">
           <button class="btn startbtn" type="button" name="button">Portfolio</button>
       </router-link>
-      <!-- <button v-on:click="gotoPortfolio" class="btn startbtn" type="button" name="button">Portfolio</button> -->
+
     </div>
     <message-box v-if="showPopup"></message-box>
 
@@ -34,30 +34,32 @@ export default {
     eventBus.$on("close-popup", () => {
       this.showPopup = false;
     });
+    // Waits until the DOM's next update cycle. Used to wait until everything
+    // on the vue is fully loaded.
+    this.$nextTick(() => {
+      const longString = "I strive to create beautiful experiences.";
+      this.typeWriter(longString);
+    })
 
-    const longString = "I strive to create beautiful experiences.";
-    this.typeWriter(longString);
 
   },
   methods: {
     popup: function() {
       this.showPopup = true;
     },
-    // gotoPortfolio: function() {
-    //     window.location.href = `/portfolio/`;
-    // },
+
     async typeWriter(wordsToBeTyped) {
       const interval = Math.random() * (90 - 40) + 40 // Math.random() * (max- min) + min
 
       if(this.count < wordsToBeTyped.length) {
         this.count += 1;
         this.typedWord = wordsToBeTyped.slice(0, this.count);
-        // console.log(wordsToBeTyped.slice(0, this.count));
+
         setTimeout(() => {
           this.typeWriter(wordsToBeTyped);
         }, interval);
       } else {
-        console.log("Done!");
+        // console.log("Done!");
       }
     }
   },
@@ -75,7 +77,7 @@ span {
 
 .typed-word {
   font-family: $secondary-font;
-  font-size: 2.5em;
+  font-size: 2.3em;
   font-weight: bolder;
   text-align: left;
 }

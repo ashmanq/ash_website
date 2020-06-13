@@ -7,7 +7,7 @@
         <h1>About Me</h1>
       </div>
       <div class="about-me-details">
-          <img src="/ashqurlogo.svg" alt="">
+          <img class="about-me-image" src="/ashqurlogo.svg" alt="Logo">
         <h3>Ashir Qureshi</h3>
 
         <p>I am an aspiring junior software developer looking to hone the skills I have gained from
@@ -31,11 +31,15 @@ export default {
 .about-me-details {
     background: $background-colour;
     padding:3em;
-    // width: 100%;
-    justify-content: flex-start;
     text-align: left;
-    margin-bottom: 4em;
+    // margin-bottom: 1em;
     border-radius: 0 0 1em 1em;
+    line-height: 1.5em;
+    font-size: 1.2em;
+}
+
+.about-me-image {
+  height:150px;
 }
 
 

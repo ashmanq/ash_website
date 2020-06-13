@@ -29,8 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .coding-projects {
-  //
-  // padding: 3em;
   margin: 3em;
   border-radius: 0.8em;
 }

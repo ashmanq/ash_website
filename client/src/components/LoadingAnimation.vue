@@ -48,7 +48,6 @@ export default {
   margin:auto;
   align-items: center;
   justify-content: center;
-
 }
 
 .loading-ring {

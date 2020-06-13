@@ -2,50 +2,75 @@
   <div class="project-detail">
     <h2 class="" >Project Details</h2>
     <div class="form-container" @submit.prevent="updateDetails">
-      <form class="details" method="post">
+      <form  method="post">
+        <table class="details-table">
+          <tr>
+            <td><label class="custom-input" for="names">Name</label></td>
+            <td><input class="custom-input" type="text" name="name" v-model:value="name" required></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" for="p-date" >Date</label></td>
+            <td><input class="custom-input" type="date" name="p-date" v-model:value="date"  placeholder="yyyy-mm-dd" required></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" >Details</label></td>
+            <td><ckeditor class="editor" :editor="editor" v-model="details" @ready="onEditorReady" :config="editorConfig"></ckeditor></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" for="img">Image</label></td>
+            <td><input class="custom-input" type="text" name="img" v-model:value="image"></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" for="link">Link</label></td>
+            <td><input class="custom-input" type="url" name="link" v-model:value="link" required></td>
+          </tr>
+          <tr>
+            <td><label v-if="type == 'coding'" class="custom-input" for="codelink">Code Link</label></td>
+            <td><input v-if="type == 'coding'" class="custom-input" type="url" name="codelink" v-model:value="codelink"></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" for="tags">Tags</label></td>
+            <td><input class="custom-input" type="text" name="tags" v-model:value="tags"></td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" for="type">Type</label></td>
+            <td>
+              <label v-if="addOrEdit=='edit'" class="custom-input type" for="type">{{ type }}</label>
+              <select v-if="addOrEdit=='add'" class="custom-input" name="type" v-model:selected="type" required>
+                <option disabled value="">Please select one</option>
+                <option  v-for="(type, index) in types" :value="type">{{ type }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="custom-input" >Featured</label></td>
+            <td>
+              <div class="row">
+                <input v-model:checked="featured" type="radio" id="No" name="featured" value="0">
+                <label for="No">No</label>
+                <input v-model:checked="featured" type="radio" id="Yes" name="featured" value="1">
+                <label for="Yes">Yes</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="warning-msg">{{ message }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <div class="row">
 
-        <label class="custom-input" for="names">Name</label>
-        <input class="custom-input" type="text" name="name" v-model:value="name" required>
+                <input v-if="addOrEdit=='edit'" class="btn" type="submit" name="" value="Update">
+                <input v-if="addOrEdit=='add'" class="btn" type="submit" name="" value="Add">
 
-        <label class="custom-input" for="p-date" >Date</label>
-        <input class="custom-input" type="date" name="p-date" v-model:value="date"  placeholder="yyyy-mm-dd" required>
+                <button v-on:click="confirmCancel()" class="btn" type="button" name="button">Cancel</button>
+              </div>
+            </td>
+          </tr>
+        </table>
 
-        <label class="custom-input" >Details</label>
-        <!-- <textarea class="custom-input" rows="10" cols="20" minlength="6" type="text" name="details" v-model:value="details" required> -->
-        <ckeditor class="editor" :editor="editor" v-model="details" @ready="onEditorReady" :config="editorConfig"></ckeditor>
-        <!-- </textarea> -->
-
-
-        <label class="custom-input" for="img">Image</label>
-        <input class="custom-input" type="text" name="img" v-model:value="image">
-
-        <label class="custom-input" for="link">Link</label>
-        <input class="custom-input" type="url" name="link" v-model:value="link" required>
-
-        <label v-if="type == 'coding'" class="custom-input" for="codelink">Code Link</label>
-        <input v-if="type == 'coding'" class="custom-input" type="url" name="codelink" v-model:value="codelink" required>
-
-        <label class="custom-input" for="tags">Tags</label>
-        <input class="custom-input" type="text" name="tags" v-model:value="tags">
-
-        <label class="custom-input" for="type">Type</label>
-
-        <label v-if="addOrEdit=='edit'" class="custom-input" for="type">{{ type }}</label>
-        <select v-if="addOrEdit=='add'" class="custom-input" name="type" v-model:selected="type" required>
-          <option disabled value="">Please select one</option>
-          <option  v-for="(type, index) in types" :value="type">{{ type }}</option>
-        </select>
-
-        <div class="">
-
-        </div>
-        <div class="row">
-
-          <input v-if="addOrEdit=='edit'" class="btn" type="submit" name="" value="Update">
-          <input v-if="addOrEdit=='add'" class="btn" type="submit" name="" value="Add">
-
-          <button v-on:click="confirmCancel()" class="btn" type="button" name="button">Cancel</button>
-        </div>
 
       </form>
     </div>
@@ -65,10 +90,10 @@ export default {
     return {
       name: "",
       date: null,
-      // details: "",
       image: "",
       link: "",
       type: "",
+      featured: "0",
       tags: "",
       codelink: null,
 
@@ -78,7 +103,8 @@ export default {
           // The configuration of the editor.
           removePlugins: [  'image' ],
          toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'heading' ]
-      }
+      },
+      message: ""
     }
   },
   mounted() {
@@ -88,11 +114,12 @@ export default {
       this.date = moment(this.project.date).format("yyyy-MM-DD");
     }
     this.name = this.project.name;
-    // this.details = this.project.details;
     this.image = this.project.image;
     this.link = this.project.link;
     this.type = this.project.type;
     this.tags = this.project.tags;
+    this.featured = this.project.featured;
+
     if(this.project.type === "coding") {
       this.codelink = this.project.codelink;
     }
@@ -114,6 +141,7 @@ export default {
         date: this.date,
         image: this.image,
         link: this.link,
+        featured: parseInt(this.featured),
         tags: this.tags,
       }
 
@@ -126,7 +154,8 @@ export default {
         .then((res) => {
           if(res == "err") {
             console.log("Error updating project");
-            eventBus.$emit('authenticated', false);
+            this.message = "Error updating project";
+            // eventBus.$emit('authenticated', false);
           } else {
             console.log("Added successfully");
             eventBus.$emit('cancel-project-selected');
@@ -137,7 +166,8 @@ export default {
         .then((res) => {
           if(res == "err") {
             console.log("Error updating project");
-            eventBus.$emit('authenticated', false);
+            this.message = "Error updating project";
+            // eventBus.$emit('authenticated', false);
           } else {
             console.log("Updated successfully");
             eventBus.$emit('cancel-project-selected');
@@ -153,38 +183,57 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-.project-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+<style lang="scss" scoped>
+  .project-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.form-container {
-  width: 100%;
-}
-.custom-input {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 1em;
-}
+  .form-container {
+    margin: auto;
+  }
 
-.editor {
-  background: #383838;
-  border-radius: 5px;
-}
-.details {
-  display: grid;
-  justify-content: center;
-  width:80%;
-  margin: auto;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 10px;
-  padding: 15px;
-  background-color: #878476;
-}
-.row {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
+  .custom-input {
+    width: 100%;
+    border-style: none;
+    padding: 0px;
+    margin: 0;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: 1.4em;
+  }
+
+  .editor {
+    background: #383838;
+    border-radius: 5px;
+  }
+
+  .details-table {
+    margin: auto;
+    background-color: #878476;
+  }
+
+  table {
+    border-color: red;
+
+  }
+  tr:nth-child(odd) {
+    background: $primary-colour;
+    padding:10px;
+  }
+
+  td {
+    text-align: center;
+
+  }
+
+  .row {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .type {
+    text-align: center;
+  }
 </style>

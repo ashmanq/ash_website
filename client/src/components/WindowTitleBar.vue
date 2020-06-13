@@ -24,20 +24,19 @@ export default {
 
 .title-bar {
   display: flex;
-  // background-color: $secondary-color;
   background:#474663;
   height: 1.4em;
   border-style: solid;
-  border-width: 2px;
-  // border-color: $secondary-color-hover;
-  border-color: #474663;
-  border-radius: 10px 10px 0 0;
+  border-width: 1px 1px 0 1px;
+  border-color: #7270a1;
+  border-radius: 8px 8px 0 0;
 }
 
 .row {
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  padding:0.2em;
 }
 
 .close {

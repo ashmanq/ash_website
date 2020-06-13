@@ -57,7 +57,12 @@ const projectValidation = (data) => {
     codelink: Joi.string()
     .max(255)
     .allow('')
-    .allow(null)
+    .allow(null),
+
+    featured: Joi.number().integer()
+    .max(1)
+    .min(0)
+
 
   });
   return schema.validate(data);

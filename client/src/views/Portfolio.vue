@@ -3,35 +3,27 @@
     <div class="window">
       <window-title-bar></window-title-bar>
       <loading-animation v-if="!loaded"></loading-animation>
+
       <div class="window-header">
         <h1>Portfolios</h1>
       </div>
 
       <div class="portfolios">
-
-        <!-- <div v-for="(type, index) in types" :type="type" :key="index" v-on:click="selectPortfolio(type)" class="portfolio-type">
-          <router-link :to="{ name: type.name, params: {} }">Yi</router-link>
-          <img class="icon" v-bind:src="type.image" alt="">
-          <h3>{{type.name}} Projects</h3>
-        </div> -->
-
         <div class="portfolio-type">
           <router-link :to="{ name: 'coding'}">
-            <img class="icon" src="/icons/CodingFolderIcon.svg" alt="">
+            <img class="p-icon" src="/icons/CodingFolderIcon.svg" alt="">
             <h3>Coding Projects</h3>
           </router-link>
         </div>
 
         <div class="portfolio-type">
           <router-link :to="{ name: 'art'}">
-            <img class="icon" src="/icons/ArtFolderIcon.svg" alt="">
+            <img class="p-icon" src="/icons/ArtFolderIcon.svg" alt="">
             <h3>Art Projects</h3>
           </router-link>
         </div>
-
       </div>
     </div>
-
 
   </div>
 </template>
@@ -62,12 +54,6 @@ export default {
     this.loaded = true;
   },
   methods: {
-    selectPortfolio: function(type){
-
-      const lowerCaseType = type.name.toLowerCase();
-      window.location.href = `/portfolio/${lowerCaseType}`;
-
-    }
   }
 }
 </script>
@@ -112,7 +98,7 @@ export default {
 
 }
 
-.icon {
+.p-icon {
   width:70%;
   align-self: center;
 }

@@ -17,7 +17,6 @@
       <router-view id="view"></router-view>
     </transition>
 
-
     <footer>&copy; Ashir Qureshi {{getCurrentYear()}}</footer>
   </div>
 
@@ -58,15 +57,13 @@ export default {
   .row {
     display: flex;
     justify-content:center;
-    background: $secondary-color;
+    // background: $secondary-color;
     border-style: none;
-    // width:100%
   }
   .logo {
     text-decoration:none;
-    // height:4em;
     height:1.3em;
-    background: $secondary-color;
+    // background: $secondary-color;
     border-radius: 0;
     padding: 1em;
   }
@@ -75,17 +72,7 @@ export default {
     cursor: pointer;
   }
 
-  .fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
 
-.fade-enter,
-.fade-leave-active {
-  opacity: 0
-}
 </style>
 
 
@@ -100,14 +87,25 @@ export default {
   src: url('./assets/font/FiraCode-VariableFont_wght.ttf') format('truetype');
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+
 body {
     background-color:$primary-colour;
-    // border-style: solid;
     margin: 0;
 }
 
 a {
   text-decoration: none;
+}
+
+.icon {
+  height:5em;
+  transition: 0.1s;
+  padding: 0.6em;
+}
+
+.icon:hover {
+  height: 6.2em;
 }
 
 .warning-msg {
@@ -128,13 +126,13 @@ a {
 }
 
 .container {
-  width:80%;
+  width:90%;
   margin: auto;
 }
 
 #app {
   /* font-family: Helvetica, Arial, sans-serif; */
-  font-family: $primary-font;
+  font-family: Roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
@@ -144,18 +142,18 @@ a {
 
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 2.5em;
+  font-size: 2em;
   border-left: 6px solid purple;
   padding-left: 0.7em;
 }
 nav {
   padding: 1em;
-  background: $secondary-color;
+  // background: $secondary-color;
   text-align: right;
 }
 nav a{
@@ -165,7 +163,7 @@ nav a{
   font-size: 1.3em;
   font-weight: bold;
   color: $font-colour;
-  background-color: $secondary-color;
+  // background-color: $secondary-color;
   transition: 0.2s;
 }
 
@@ -257,6 +255,18 @@ img{
   color: $font-colour-secondary;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  opacity: 0
+}
 
 footer {
   background: $footer-colour;

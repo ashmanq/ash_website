@@ -3,34 +3,42 @@
 
     <div class="window">
       <window-title-bar></window-title-bar>
-      <loading-animation v-if="!loaded"></loading-animation>
-      <router-link v-if="loaded" :to="{ name: project.type}">
-      <p class="breadcrumb">&larr; {{ project.type }} Projects</p>
-      </router-link>
+      <!-- <transition name="fade" mode="out-in"> -->
+        <loading-animation v-if="!loaded"></loading-animation>
+      <!-- </transition> -->
 
-      <div v-if="project" class="information">
+      <transition name="fade" mode="out-in">
+        <div v-if="loaded" class="project-details">
 
-        <div class="grid-item">
-          <h2 class="header">{{ name }}</h2>
-          <h3 class="date">Date: {{ date }}</h3>
-        </div>
+          <router-link v-if="loaded" :to="{ name: project.type}">
+          <p class="breadcrumb">&larr; {{ project.type }} Projects</p>
+          </router-link>
 
-        <div class="grid-buttons">
-          <a v-if="project.link" v-bind:href="project.link" class="btn" type="button" name="button">View Project</a>
-          <a v-if="project.codelink" v-bind:href="project.codelink" class="btn" type="button" name="button">View Code</a>
-        </div>
-
-        <article class="grid-item details" v-html="details">
-        </article>
-
-        <div class="grid-item">
-          <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
-          <div class="row">
-            <div class="tags" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
+          <div v-if="project" class="information">
+            <div class="grid-item">
+              <h2 class="header">{{ name }}</h2>
+              <h3 class="date">Date: {{ date }}</h3>
+            </div>
+            <div class="grid-buttons">
+              <a v-if="project.link" v-bind:href="project.link"  type="button" name="button">
+                <img class="icon" src="/icons/demositeicon.svg" v-bind:alt="project.title">
+              </a>
+              <a v-if="project.codelink" v-bind:href="project.codelink"  type="button" name="button">
+                <img class="icon" src="/icons/codeicon.svg" v-bind:alt="project.title">
+              </a>
+            </div>
+            <article class="grid-item details" v-html="details">
+            </article>
+            <div class="grid-item">
+              <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
+              <div class="row">
+                <div class="tags" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
+              </div>
+            </div>
           </div>
         </div>
+      </transition>
 
-      </div>
     </div>
 
   </div>
@@ -78,7 +86,6 @@ export default {
         }
         this.loaded = true;
       } catch (e) {
-        console.log(e);
         this.loaded = true;
       }
     });
@@ -92,25 +99,10 @@ export default {
 </script>
 <style lang="css">
 
-/* .details h3 {
-  font-size: 1.6em;
-  margin-bottom: 0.2em;
-  border-left: 6px solid purple;
-  padding-left: 0.7em;
-  height:1.2em;
-} */
 
 </style>
 <style lang="scss" scoped>
 
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items:center;
-//   background: $primary-colour;
-//   width:80%;
-//   margin: 4em auto 0 auto;
-// }
 
 .information {
   max-width: 80%;
@@ -123,14 +115,14 @@ export default {
 }
 
 .header {
-  font-size: 2.6em;
+  font-size: 2em;
   margin-top: 0em;
   margin-bottom: 0.4em;
   text-align: left;
 }
 
 .details {
-  line-height: 1.8em;
+  line-height: 1.5em;
   font-size: 1.2em;
   text-align: left;
 }
@@ -139,6 +131,7 @@ export default {
 .date {
   margin-top: 0px;
   text-align: left;
+  color: $font-colour-secondary;
 }
 
 .grid-item{
@@ -150,7 +143,8 @@ export default {
 
 .grid-buttons {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content:center;
 }
 
 
