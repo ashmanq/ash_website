@@ -4,17 +4,19 @@
       <window-title-bar title="Contact Me"></window-title-bar>
 
       <div class="container">
-        <form class="form" action="index.html" method="post">
+        <form class="form" @submit.prevent="sendMail()" action="index.html" method="post">
           <label for="name">Name:</label>
-          <input type="text" name="name" value="" required>
+          <input type="text" name="name" v-model:value="name" required>
 
           <label for="email">Email:</label>
-          <input type="email" name="email" value="" required>
+          <input type="email" name="email" v-model:value="email" required>
 
           <label for="message">Message:</label>
-          <textarea name="message" rows="8" cols="80" required></textarea>
+          <textarea name="message" rows="8" cols="80" v-model:value="message" required></textarea>
           <label for=""></label>
           <input id="sub-btn" class="btn" type="submit" name="submit" value="submit">
+          <p></p>
+          <p class="warning-msg">{{ warningMsg }}</p>
         </form>
 
       </div>
@@ -24,8 +26,45 @@
 </template>
 
 <script>
+import MailService from '@/services/MailService.js';
+
+
 export default {
   name: 'contact',
+  data() {
+    return {
+      name: "",
+      email: "",
+      message: "",
+      warningMsg: "",
+    }
+  },
+  mounted() {
+    this.warningMsg = "";
+  },
+  methods: {
+    sendMail() {
+      this.warningMsg = ""
+
+      const newMessage = {
+        name: this.name,
+        email: this.email,
+        message: this.message
+      }
+
+      MailService.sendMail(newMessage)
+      .then((res) => {
+        if(res.error) {
+          this.warningMsg = res.error;
+        } else {
+          this.name = "";
+          this.email = "";
+          this.message = ""
+          this.warningMsg = "Success!"
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -49,6 +88,10 @@ export default {
   margin:0.2em;
 }
 
+.warning-msg {
+  font-size: 2em;
+  text-align: center;
+}
 #sub-btn{
   width:10em;
   margin:1em auto 1em auto;

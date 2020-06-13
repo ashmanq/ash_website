@@ -68,7 +68,22 @@ const projectValidation = (data) => {
   return schema.validate(data);
 };
 
+const mailValidation = (data) => {
+  const schema = Joi.object({
+    name: Joi.string()
+      .max(255)
+      .required(),
 
+    email: Joi.string()
+      .email()
+      .required(),
+
+    message: Joi.string()
+    .required(),
+  });
+  return schema.validate(data);
+};
 
 module.exports.loginValidation = loginValidation;
 module.exports.projectValidation = projectValidation;
+module.exports.mailValidation = mailValidation;

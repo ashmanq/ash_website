@@ -111,6 +111,7 @@ a {
 .warning-msg {
     color:$warning-color;
     font-size: 1.4em;
+    transition: all 0.5s ease-in-out;
 }
 
 .window {

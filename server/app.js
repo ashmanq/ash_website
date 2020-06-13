@@ -7,6 +7,7 @@ const mysql = require('mysql');
 //Import Routes
 const projectRoutes = require('./routes/projectRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
+const mailRoutes = require('./routes/mailRoutes.js');
 
 // Middleware
 app.use(express.json());
@@ -31,6 +32,7 @@ con.connect((err) => {
   const codingRouter = projectRoutes(con, 'coding');
   const artRouter = projectRoutes(con, 'art');
   const adminRouter = adminRoutes(con);
+  const mailRouter = mailRoutes();
 
 
   // In production environment the app sits in a subdomain. A check is made for a
@@ -45,6 +47,7 @@ con.connect((err) => {
     app.use('/api/coding', codingRouter);
     app.use('/api/art', artRouter);
     app.use('/api/admin', adminRouter);
+    app.use('/api/mail/send', mailRouter);
   }
   console.log('MySQL Connected...');
 });

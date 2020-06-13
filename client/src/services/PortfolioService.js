@@ -83,6 +83,5 @@ const checkAuthentication = function(res) {
 }
 
 const errorHandling = function(res) {
-  console.log("Yo!");
   return "err";
 }
