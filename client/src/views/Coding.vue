@@ -27,10 +27,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.coding-projects {
-  margin: 3em;
-  border-radius: 0.8em;
-}
+  .coding-projects {
+    margin: 3em;
+    border-radius: 0.8em;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .coding-projects {
+      margin: 1em;
+      border-radius: 0.4em;
+    }
+  }
 
 
 </style>

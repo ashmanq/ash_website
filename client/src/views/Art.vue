@@ -28,10 +28,16 @@ export default {
 
 <style lang="scss" scoped>
 
-.art-projects {
-  // padding: 3em;
-  margin: 3em;
-  border-radius: 0.8em;
-}
+  .art-projects {
+    margin: 3em;
+    border-radius: 0.8em;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .art-projects {
+      margin: 1em;
+      border-radius: 0.4em;
+    }
+  }
 
 </style>

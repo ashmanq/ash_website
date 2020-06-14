@@ -18,6 +18,7 @@ Vue.config.productionTip = false;
 
 export const eventBus = new Vue();
 
+
 new Vue({
   router,
   render: h => h(App),

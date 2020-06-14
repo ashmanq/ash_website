@@ -80,46 +80,78 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-span {
-  color:$secondary-color;
-}
+  span {
+    color:$secondary-color;
+  }
 
 
-.typed-word {
-  font-family: $secondary-font;
-  font-size: 2.3em;
-  font-weight: bolder;
-  text-align: left;
-}
+  .typed-word {
+    font-family: $secondary-font;
+    font-size: 2.3em;
+    font-weight: bolder;
+    text-align: left;
+  }
 
-.cursor {
-  font-size: 1.2em;
-  background: $secondary-color;
-}
+  .cursor {
+    font-size: 1.2em;
+    background: $secondary-color;
+  }
 
 
-.name {
-  text-align: left;
-  font-size: 1.6em;
-  margin-top: 1em;
-}
+  .name {
+    text-align: left;
+    font-size: 1.6em;
+    margin-top: 1em;
+  }
 
-.intro-text{
-  background:$background-colour;
-  padding: 4em;
-}
+  .intro-text{
+    background:$background-colour;
+    padding: 4em;
+  }
 
-.intro-what {
-  font-family: "firacode";
-  font-size: 2.5em;
-  text-align: left;
-  margin-top: 1.2em;
-  margin-bottom: 2em;
-}
+  .intro-what {
+    font-family: "firacode";
+    font-size: 2.5em;
+    text-align: left;
+    margin-top: 1.2em;
+    margin-bottom: 2em;
+  }
 
-.startbtn {
+  .startbtn {
 
-  font-size: 1.7em;
-  margin-left: 0;
-}
+    font-size: 1.7em;
+    margin-left: 0;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    .typed-word {
+      font-size: 1.8em;
+    }
+
+    .cursor {
+      font-size: 1em;
+    }
+
+
+    .name {
+      font-size: 1.2em;
+      margin-top: 0.5em;
+    }
+
+    .intro-text{
+      background:$background-colour;
+      padding: 1.2em;
+    }
+
+    .intro-what {
+      font-size: 1.2em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    .startbtn {
+      font-size: 1.2em;
+    }
+  }
 </style>

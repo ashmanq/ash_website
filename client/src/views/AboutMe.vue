@@ -3,7 +3,7 @@
 
     <div class="window">
       <window-title-bar title="About Me"></window-title-bar>
-      
+
       <div class="about-me-details">
           <img class="about-me-image" src="/ashqurlogo.svg" alt="Logo">
         <h3>Ashir Qureshi</h3>
@@ -26,19 +26,32 @@ export default {
 
 <style lang="scss" scoped>
 
-.about-me-details {
-    background: $background-colour;
-    padding:3em;
-    text-align: left;
-    // margin-bottom: 1em;
-    border-radius: 0 0 1em 1em;
-    line-height: 1.5em;
-    font-size: 1.2em;
-}
+  .about-me-details {
+      background: $background-colour;
+      padding:3em;
+      text-align: left;
+      // margin-bottom: 1em;
+      border-radius: 0 0 1em 1em;
+      line-height: 1.5em;
+      font-size: 1.2em;
+  }
 
-.about-me-image {
-  height:150px;
-}
+  .about-me-image {
+    height:150px;
+  }
 
+  @media only screen and (max-width: 600px) {
+    .about-me-details {
+        padding:1em;
+        text-align: left;
+        // margin-bottom: 1em;
+        border-radius: 0 0 1em 1em;
+        line-height: 1.2em;
+        font-size: 1em;
+    }
 
+    .about-me-image {
+      height:80px;
+    }
+  }
 </style>

@@ -35,39 +35,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display:flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  background-color: $secondary-color;
-  color:#DFDFDF;
-  width: 300px;
-  margin: 1em;
-  padding: 1em;
-  border-radius: 1em;
-  transition: 0.5s;
-}
+  .container {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: $secondary-color;
+    color:#DFDFDF;
+    width: 300px;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    transition: 0.5s;
+  }
 
-.container:hover {
-  background-color: $secondary-color-hover;
-  cursor: pointer;
-}
+  .container:hover {
+    background-color: $secondary-color-hover;
+    cursor: pointer;
+  }
 
-.name {
-  font-size: 2em;
-}
+  .name {
+    font-size: 2em;
+  }
 
-img{
-  max-width: 50%;
-  align-self: center;
-  margin-bottom: 20px;
-}
+  img{
+    max-width: 50%;
+    align-self: center;
+    margin-bottom: 20px;
+  }
 
-a{
-  color:#DFDFDF
-}
+  a{
+    color:#DFDFDF
+  }
 
-@media query {
+  @media only screen and (max-width: 600px) {
+    .container {
+      width: 200px;
+      margin: 1em;
+      padding: 1em;
+      border-radius: 1em;
+    }
 
-}
+    .name {
+      font-size: 1.2em;
+    }
+
+    img{
+      max-width: 50%;
+      margin-bottom: 20px;
+    }
+
+  }
 </style>
