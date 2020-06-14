@@ -4,17 +4,18 @@
       <window-title-bar title="Contact Me"></window-title-bar>
 
       <div class="container">
-        <form class="form" @submit.prevent="sendMail()" action="index.html" method="post">
+        <form id="contact-form" class="form" @submit.prevent="sendMail()" action="index.html" method="post">
           <label for="name">Name:</label>
-          <input type="text" name="name" v-model:value="name" required>
+          <input type="text" name="name" v-model:value="newMail.name" required>
 
           <label for="email">Email:</label>
-          <input type="email" name="email" v-model:value="email" required>
+          <input type="email" name="email" v-model:value="newMail.email" required>
 
           <label for="message">Message:</label>
-          <textarea name="message" rows="8" cols="80" v-model:value="message" required></textarea>
+          <textarea name="message" rows="8" cols="80" v-model:value="newMail.message" required></textarea>
           <label for=""></label>
-          <input id="sub-btn" class="btn" type="submit" name="submit" value="submit">
+          <input id="sub-btn" class="btn"
+          type="submit" name="submit" value="submit"/>
           <p></p>
           <p class="warning-msg">{{ warningMsg }}</p>
         </form>
@@ -26,16 +27,18 @@
 </template>
 
 <script>
-import MailService from '@/services/MailService.js';
 
+import MailService from '@/services/MailService.js';
 
 export default {
   name: 'contact',
   data() {
     return {
-      name: "",
-      email: "",
-      message: "",
+      newMail: {
+        name: "",
+        email: "",
+        message: ""
+      },
       warningMsg: "",
     }
   },
@@ -43,26 +46,30 @@ export default {
     this.warningMsg = "";
   },
   methods: {
-    sendMail() {
-      this.warningMsg = ""
 
-      const newMessage = {
-        name: this.name,
-        email: this.email,
-        message: this.message
-      }
+    async sendMail() {
 
-      MailService.sendMail(newMessage)
+      this.warningMsg = "";
+
+      // Google ReCaptcha
+      await this.$recaptchaLoaded();
+      const token = await this.$recaptcha('submit');
+
+      this.newMail.token = token;
+
+      // Send message to server
+      MailService.sendMail(this.newMail)
       .then((res) => {
+        this.newMail.name = "";
+        this.newMail.email = "";
+        this.newMail.message = ""
+
         if(res.error) {
           this.warningMsg = res.error;
         } else {
-          this.name = "";
-          this.email = "";
-          this.message = ""
           this.warningMsg = "Success!"
         }
-      })
+      });
     }
   }
 }

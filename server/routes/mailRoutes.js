@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv').config();
-// const mail = require ('../mail.js');
+const fetch = require('node-fetch');
 
 // Validation of entries to schema
 const { mailValidation } = require('../validation.js');
@@ -18,6 +18,7 @@ const createRouter = function() {
     const { error } = mailValidation(req.body);
     if(error) return res.status(400).send({error: error.details[0].message});
 
+
     const message = `
       <p> You have a new message from AshQur.co.uk</p>
       <h3> Message Details </h3>
@@ -27,8 +28,15 @@ const createRouter = function() {
       </ul>
       <p>Message: ${req.body.message}</p>
     `;
-
-    mail(message, res).catch(console.error)
+    recaptchaVerify(req.body.token)
+    .then((response) => {
+      console.log(response);
+      if(response.success && response.score > 0.5) {
+        mail(message, res).catch(console.error)
+      } else {
+        res.status(400).send({error: "Suspected bot activity!"});
+      }
+    });
 
   })
 
@@ -63,8 +71,15 @@ const createRouter = function() {
         res.json({success: "Message sent successfully!"});
       }
     });
+  }
 
-
+  function recaptchaVerify(token) {
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_KEY}&response=${token}`;
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
   }
 
   return router;

@@ -80,6 +80,9 @@ const mailValidation = (data) => {
 
     message: Joi.string()
     .required(),
+
+    token: Joi.string()
+    .required(),
   });
   return schema.validate(data);
 };
