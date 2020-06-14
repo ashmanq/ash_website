@@ -27,14 +27,19 @@
                 <img class="icon" src="/icons/codeicon.svg" v-bind:alt="project.title">
               </a>
             </div>
+
+            <div class="grid-item">
+              <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
+            </div>
+
             <article class="grid-item details" v-html="details">
             </article>
             <div class="grid-item">
-              <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
               <div class="row">
-                <div class="tags" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
+                <div class="tags row" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
               </div>
             </div>
+
           </div>
         </div>
       </transition>
@@ -92,7 +97,7 @@ export default {
   },
   methods: {
     imageUrlAlt(event) {
-      event.target.src = "https://www.ashqur.co.uk/img/logo.82b9c7a5.png"
+      event.target.src = "/icons/CodingFolderIcon.svg"
     }
   }
 }
@@ -103,81 +108,111 @@ export default {
 </style>
 <style lang="scss" scoped>
 
+  .information {
+    max-width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row: auto;
+    grid-gap: 1em 6em;
+    margin-top: 3em;
+  }
 
-.information {
-  max-width: 80%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-row: auto;
-  grid-gap: 3em 6em;
-  margin-top: 3em;
-}
+  .header {
+    font-size: 2em;
+    margin-top: 0em;
+    margin-bottom: 0.4em;
+    text-align: left;
+  }
 
-.header {
-  font-size: 2em;
-  margin-top: 0em;
-  margin-bottom: 0.4em;
-  text-align: left;
-}
-
-.details {
-  line-height: 1.5em;
-  font-size: 1.2em;
-  text-align: left;
-}
-
-
-.date {
-  margin-top: 0px;
-  text-align: left;
-  color: $font-colour-secondary;
-}
-
-.grid-item{
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  height: auto;
-}
-
-.grid-buttons {
-  display: flex;
-  align-items: center;
-  justify-content:center;
-}
+  .details {
+    line-height: 1.5em;
+    font-size: 1.2em;
+    text-align: left;
+  }
 
 
-.row{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2.5em;
-}
+  .date {
+    margin-top: 0px;
+    text-align: left;
+    color: $font-colour-secondary;
+  }
 
-.image {
-  object-fit: cover;
-  width: 100%;
-  margin: 1.8em 0em 0em 0em;
-}
+  .grid-item{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: auto;
+  }
 
-.btn {
-  width:100px;
-  font-size: 1.2em;
-}
+  .grid-buttons {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+  }
 
-.tags {
-  margin: 1em 1.5em 0 1em;
-  font-weight: bold;
-  text-align: center;
-  padding: 0.6em;
-  background-color: $secondary-color;
-  border-radius: 10px;
-}
 
-.breadcrumb {
-  display: block;
-  margin-top: 1em;
-}
+  .row{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5em;
+  }
+
+  .image {
+    object-fit: cover;
+    width: 100%;
+    margin: 1.8em 0em 0em 0em;
+  }
+
+  .btn {
+    width:100px;
+    font-size: 1.2em;
+  }
+
+  .tags {
+    margin: 1em 1.5em 0 1em;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.6em;
+    background-color: $secondary-color;
+    border-radius: 10px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .information {
+      max-width: 90%;
+      grid-gap: 1em 3em;
+      margin-top: 2em;
+    }
+
+    .header {
+      font-size: 1.7em;
+    }
+
+    .details {
+      line-height: 1.1em;
+      font-size: 1.1em;
+      text-align: left;
+    }
+
+    .row{
+      margin-top: 2em;
+    }
+
+    .image {
+      margin: 1em 0em 0em 0em;
+    }
+
+    .btn {
+      width:80px;
+      font-size: 1em;
+    }
+
+    .tags {
+      margin: 0.4em 1em 0 0.5em;
+      padding: 0.2em;
+    }
+  }
 
 </style>

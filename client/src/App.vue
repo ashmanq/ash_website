@@ -109,10 +109,11 @@ export default {
     height:5em;
     transition: 0.1s;
     padding: 0.6em;
+    transition: all 0.2s ease-in-out;
   }
 
   .icon:hover {
-    height: 6.2em;
+    filter: brightness(70%);
   }
 
   .warning-msg {
@@ -280,7 +281,7 @@ export default {
     text-align: center;
   }
 
-  @media only screen and (max-width: 600px) {  
+  @media only screen and (max-width: 600px) {
 
     .icon {
       height:3em;
@@ -324,7 +325,8 @@ export default {
     }
 
     .btn{
-      padding:10px;
+      font-size: 1.1em;
+      padding:15px;
       margin: 10px;
     }
 

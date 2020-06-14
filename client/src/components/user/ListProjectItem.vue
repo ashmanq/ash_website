@@ -1,11 +1,12 @@
 <template lang="html">
 
-  <!-- <div v-on:click="selectProjectItem()" class="container"> -->
   <div class="">
     <router-link :to="'/portfolio/'+ project.type + '/' + project.id">
-      <div class="container">
-        <h3 class="name">{{ project.name }}</h3>
-        <p> {{ project.date }}</p>
+      <div class="image">
+        <img v-if="project.image" class="project-item" @error="imageUrlAlt" v-bind:src="project.image" alt="">
+        <img v-if="!project.image" class="project-item" src="/icons/CodingFolderIcon.svg" alt="">
+        <h3 class="project-item-heading">{{ project.name }}</h3>
+        <!-- <p> {{ project.date }}</p> -->
       </div>
     </router-link>
   </div>
@@ -27,26 +28,56 @@ export default {
 
   },
   methods: {
-    selectProjectItem: function(){
-      window.location.href = `/portfolio/${this.project.type}/${this.project.id}`;
+    imageUrlAlt(event) {
+      event.target.src = "/icons/CodingFolderIcon.svg"
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    display:flex;
+  .image {
+    display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    background-color: $secondary-color;
-    color:#DFDFDF;
-    width: 300px;
-    margin: 1em;
+    position: relative;
+    width: 210px;
+    height: 180px;
     padding: 1em;
-    border-radius: 1em;
-    transition: 0.5s;
+    align-items: center;
+    justify-content: center;
   }
+
+  .image:hover {
+    .project-item-heading {
+      opacity: 0.9;
+    }
+  }
+
+  .project-item {
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    // background-color: $secondary-color;
+    color:#DFDFDF;
+    border-radius: 7px;
+    transition: 0.2s;
+  }
+
+
+  .project-item-heading {
+    position: absolute;
+    text-align: center;
+    background-color: $secondary-color;
+    // border-radius: 6px;
+    margin: 0;
+    opacity: 0;
+    width:85%;
+    // top:15%;
+    transition: all 0.2s ease-in-out;
+  }
+
 
   .container:hover {
     background-color: $secondary-color-hover;
@@ -54,13 +85,8 @@ export default {
   }
 
   .name {
-    font-size: 2em;
-  }
-
-  img{
-    max-width: 50%;
-    align-self: center;
-    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-align: center;
   }
 
   a{
@@ -79,10 +105,6 @@ export default {
       font-size: 1.2em;
     }
 
-    img{
-      max-width: 50%;
-      margin-bottom: 20px;
-    }
 
   }
 </style>

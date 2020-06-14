@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="container">
 
-    <div action="#" @submit.prevent="login">
+    <!-- <div action="#" > -->
 
         <!-- <form class="form" action="index.html" method="post"> -->
-        <form class="form" method="post">
+        <form class="form" @submit.prevent="login" method="post">
         <h2>Login</h2>
 
         <label for="username">Username</label>
@@ -18,7 +18,7 @@
         <p class="warning-msg">{{ msg }}</p>
         <p></p>
       </form>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -65,42 +65,67 @@ export default {
 </script>
 
 <style lang="css" scoped>
-button {
-  margin-top: 40px;
-}
-.container {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-}
+  button {
+    margin-top: 40px;
+  }
+  .container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.form {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5em;
-  border-style: solid;
-  border-radius: 10px;
-  width: 500px;
-  /* padding-bottom:40px; */
-}
+  .form {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5em;
+    border-style: solid;
+    border-radius: 10px;
+    width: 80%;
+    /* padding-bottom:40px; */
+  }
 
-.form input {
-  font-size: 1.2em;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 5px;
-}
+  .form input {
+    font-size: 1.2em;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+  }
 
-.form label {
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
+  .form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
 
-.warning-msg {
-  color: red;
-  font-size: 0.7em;
-  height: 30px;
-}
+  .warning-msg {
+    color: red;
+    font-size: 0.7em;
+    height: 30px;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    button {
+      margin-top: 20px;
+    }
+
+    .form {
+      font-size: 1.1em;
+      width: 80%;
+    }
+
+    .form input {
+      font-size: 1em;
+    }
+
+    .form label {
+      margin-top: 5px;
+    }
+
+    .warning-msg {
+      font-size: 0.6em;
+    }
+
+  }
 </style>

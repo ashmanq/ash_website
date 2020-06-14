@@ -6,12 +6,29 @@
 
       <div class="about-me-details">
           <img class="about-me-image" src="/ashqurlogo.svg" alt="Logo">
-        <h3>Ashir Qureshi</h3>
+        <h2 class="name">Ashir Qureshi</h2>
+        <article class="">
+          <h3 class="start-text">I want to make art!</h3>
+          <p>Beautiful, functional and robust art!
+            I believe in taking the tools available to you and bending them to your will as a person.</p>
 
-        <p>I am an aspiring junior software developer looking to hone the skills I have gained from
-        working with CodeClan.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>I love technology, and have been involved with computing, programming and generally tinkering
+            with computers for most of my life. I aspire to <b>continuously improve my skills</b> and to continue
+            evolving as a software developer. There is no such thing as true perfection, it’s the journey
+            towards perfection that matters most.</p>
+
+          <p>My background is in <b>Engineering</b>, after graduating with a Masters I worked in the railway industry for
+            9 years. After a turn of events…fate perhaps? I was given the opportunity to change careers. I have
+            always loved engineering and always will, for me going into Software Development is just a new page on
+            my journey as an engineer.</p>
+
+          <p>From my time at CodeClan and before, I have learnt that the most important parts of being a developer are the
+            abilities to continue growing my skills and to collaborating in teams. Please have a look at my <router-link :to="{ name: 'portfolio' }">portfolio</router-link> and if
+            you are interested in having me work with you, you can contact me <router-link :to="{ name: 'contact' }">here.</router-link></p>
+        </article>
+
+
+        <p></p>
       </div>
     </div>
 
@@ -25,7 +42,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .name {
+    font-size: 1.2em;
+  }
+  .start-text {
+    font-size: 1.8em;
+    line-height: 2em;
+    font-style:italic;
+  }
   .about-me-details {
       background: $background-colour;
       padding:3em;
@@ -41,6 +65,16 @@ export default {
   }
 
   @media only screen and (max-width: 600px) {
+
+    .name {
+      font-size: 1em;
+    }
+    
+    .start-text {
+      font-size: 1.6em;
+      line-height: 1.5em;
+    }
+
     .about-me-details {
         padding:1em;
         text-align: left;
