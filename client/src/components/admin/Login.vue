@@ -67,6 +67,7 @@ export default {
 <style lang="css" scoped>
   button {
     margin-top: 40px;
+    font-size: 1em;
   }
   .container {
     display:flex;

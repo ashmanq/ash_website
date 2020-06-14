@@ -1,9 +1,13 @@
 <template lang="html">
   <div class="message-window">
     <div class="message-box">
-      <span v-on:click="closePopup()" class="close">&times;</span>
-      <h2>This is a test</h2>
-      <p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h2>Confirm</h2>
+      <p class="message">{{  message }}</p>
+      <div class="row">
+        <button v-on:click="confirmPopup()" class="btn" type="button" name="button">OK</button>
+        <button v-on:click="closePopup()" class="btn" type="button" name="button">Cancel</button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -14,6 +18,7 @@ import {eventBus} from "@/main.js";
 
 export default {
   name: 'message-box',
+  props: ['message', 'event'],
   data() {
     return {
 
@@ -22,39 +27,48 @@ export default {
   methods: {
     closePopup(){
       eventBus.$emit('close-popup');
+    },
+
+    confirmPopup() {
+      eventBus.$emit('close-popup');
+      eventBus.$emit(this.event);
     }
   }
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
   .message-window {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     /* display: none; */
     position: absolute;
     overflow: auto; /* Enable scroll if needed */
-    z-index: 1;
+    z-index: 1000;
     background-color: rgba(0, 0, 0, 0.8);
     left: 0;
     top: 0;
     width: 100vw; /* Full width */
-    height: 100vw; /* Full height */
+    height: 100vh; /* Full height */
   }
 
   .message-box {
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    background-color: $background-colour;
     margin-top: 5%;
     width: 60vw;
-    height: 30%;
+    height:350px;
     padding: 20px;
     border: 1px solid #888;
     overflow: auto;
   }
 
   .message {
-    font-size: 3em;
+    font-size: 2em;
   }
 
   /* The Close Button */

@@ -97,8 +97,17 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
 
   body {
-      background-color:$primary-colour;
-      margin: 0;
+    // background-color:$primary-colour;
+    margin: 0;
+    background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
   }
 
   a {
@@ -124,7 +133,11 @@ export default {
 
   .window {
       background: $background-colour;
+
       border-radius: 12px 12px 0 0;
+      border-style: solid;
+      border-width: 1px;
+      border-color: $primary-colour;
       margin: 20px;
       padding-bottom: 20px;
   }
@@ -197,6 +210,7 @@ export default {
     text-decoration: none;
     font-weight: bold;
     outline: none;
+    font-size: 1.5em;
     color: #D8D8D8;
     display:block;
     padding:20px;

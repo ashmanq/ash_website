@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <td><label class="custom-input" >Details</label></td>
-            <td><ckeditor class="editor" :editor="editor" v-model="details" @ready="onEditorReady" :config="editorConfig"></ckeditor></td>
+            <td><ckeditor class="editor" :editor="editor" v-model="details" @ready="onEditorReady" :config="editorConfig" required></ckeditor></td>
           </tr>
           <tr>
             <td><label class="custom-input" for="img">Image</label></td>
@@ -134,6 +134,10 @@ export default {
       eventBus.$emit('cancel-project-selected');
     },
     updateDetails() {
+      if (this.details == "") {
+        this.message = "Details can't be empty!";
+        return
+      }
       const newProject = {
         name: this.name,
         type: this.type,
@@ -157,7 +161,7 @@ export default {
 
             if(res.error == "Invalid Token") {
               localStorage.removeItem('user', res.user);
-              localStorage.dremoveItem('token', res.token);
+              localStorage.removeItem('token', res.token);
               eventBus.$emit('authenticated', false);
             }
 

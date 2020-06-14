@@ -42,7 +42,7 @@ export default {
     position: relative;
     width: 210px;
     height: 180px;
-    padding: 1em;
+    margin: 1em;
     align-items: center;
     justify-content: center;
   }
@@ -55,11 +55,9 @@ export default {
 
   .project-item {
     display: flex;
-    // flex-direction: column;
     justify-content: center;
     width: 100%;
     height: 100%;
-    // background-color: $secondary-color;
     color:#DFDFDF;
     border-radius: 7px;
     transition: 0.2s;
@@ -67,14 +65,16 @@ export default {
 
 
   .project-item-heading {
+    display:flex;
+    flex-direction: column;
     position: absolute;
     text-align: center;
+    justify-content: center;
     background-color: $secondary-color;
-    // border-radius: 6px;
     margin: 0;
     opacity: 0;
-    width:85%;
-    // top:15%;
+    width:100%;
+    height:100%;
     transition: all 0.2s ease-in-out;
   }
 
