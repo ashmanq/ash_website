@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="column">
-    <img v-on:click="deleteProject()" class="delete" src="/icons/x.svg">
+  <div class="column admin-list-item">
+    <img v-on:click="showConfirmationPoppup" class="delete" src="/icons/x.svg">
     <div v-on:click="projectSelected" class="image">
         <!-- <p  class="close">&times;</p> -->
         <!-- <p v-on:click="deleteProject()" class="close">&times;</p> -->
@@ -8,7 +8,17 @@
       <img v-if="!project.image" class="project-item" src="/icons/CodingFolderIcon.svg" alt="">
       <h3 class="project-item-heading">{{ project.name }}</h3>
     </div>
-        <message-box v-if="showPopup" message="Confirm Delete?" event="admin-project-delete"></message-box>
+
+    <div v-if="showPopup" class="options">
+      <p>Confirm Delete?</p>
+      <div class="row">
+        <button v-on:click="confirmDelete" type="button" name="button">OK</button>
+        <button v-on:click="cancelPoppup" type="button" name="button">Cancel</button>
+      </div>
+
+    </div>
+
+        <!-- <message-box v-if="showPopup" message="Confirm Delete?" event="admin-project-delete"></message-box> -->
   </div>
 </template>
 
@@ -26,27 +36,27 @@ export default {
     }
   },
   mounted() {
-    eventBus.$on("close-popup", () => {
-      this.showPopup = false;
-    });
-    eventBus.$on("popup-confirm-project-delete", () => {
-      eventBus.$emit('admin-project-selected', this.project);
-    });
+
   },
   methods: {
-    projectSelected: function() {
+    projectSelected() {
       eventBus.$emit('admin-project-selected', this.project);
     },
-    deleteProject: function() {
+
+    showConfirmationPoppup() {
       // eventBus.$emit('admin-project-delete', this.project);
       this.showPopup = true;
-      console.log("Delete!");
     },
     imageUrlAlt(event) {
       event.target.src = "/icons/CodingFolderIcon.svg"
     },
-    popup: function() {
-      this.showPopup = true;
+
+    cancelPoppup() {
+      this.showPopup = false;
+    },
+
+    confirmDelete() {
+      eventBus.$emit('admin-project-delete', this.project);
     }
   },
   components: {
@@ -56,6 +66,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.admin-list-item {
+  position:relative;
+}
+.options {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-items: center;
+  text-align: center;
+  font-size: 2em;
+  background-color: black;
+  width:100%;
+  height:100%;
+  z-index: 10;
+  transform: translate(0,-100%);
+  button {
+    font-size: 0.6em;
+    margin: 10px;
+  }
+  button:hover {
+
+    cursor: pointer;
+  }
+}
+
+
 .image {
   display: flex;
   flex-direction: column;

@@ -39,7 +39,7 @@ const router = new Router({
       component: Art
     },
     {
-      path: '/admin',
+      path: '/webadmin',
       name: 'admin',
       component: Admin
     },
