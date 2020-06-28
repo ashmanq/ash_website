@@ -27,6 +27,7 @@ export default {
   .title {
     padding-left: 12px;
     text-align: center;
+    font-size: 26px;
     padding: 5px;
     flex: 1;
   }
@@ -55,5 +56,13 @@ export default {
     border-radius: 3px;
     background-color: $warning-color;
     position: absolute;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .title {
+
+      font-size: 18px;
+
+    }
   }
 </style>

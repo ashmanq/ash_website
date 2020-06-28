@@ -17,7 +17,28 @@
       <router-view id="view"></router-view>
     </transition>
 
-    <footer>&copy; Ashir Qureshi {{getCurrentYear()}}</footer>
+    <footer>
+      <div class="copyright">
+        &copy; Ashir Qureshi {{getCurrentYear()}}
+      </div>
+      <div class="links">
+        <div class="info-item">
+          <a href="https://www.linkedin.com/in/ashir-qureshi/">
+            <img class="footer-icon" src="/icons/linkedinicon.svg" alt="linkedIn">
+          </a>
+        </div>
+        <div class="info-item">
+          <a href="https://github.com/ashmanq">
+            <img class="footer-icon" src="/icons/githubicon.svg" alt="linkedIn">
+          </a>
+        </div>
+        <div class="info-item">
+          <a href="https://www.instagram.com/ash_manq/">
+            <img class="footer-icon" src="/icons/instagramicon.svg" alt="linkedIn">
+          </a>
+        </div>
+      </div>
+    </footer>
   </div>
 
 
@@ -79,6 +100,15 @@ export default {
     cursor: pointer;
   }
 
+  .footer-icon {
+    height:30px;
+    margin:5px;
+  }
+
+  .links {
+    display:flex;
+  }
+
 
 </style>
 
@@ -97,21 +127,26 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
 
   body {
-    // background-color:$primary-colour;
-    margin: 0;
-    background:
-    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-    background-color: #131313;
-    background-size: 20px 20px;
+    background-color:$primary-colour;
+    // margin: 0;
+    // background:
+    // linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    // linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    // linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    // linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    // linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    // linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    // background-color: #131313;
+    // background-size: 20px 20px;
   }
 
   a {
     text-decoration: none;
+    color:$font-colour-secondary;
+  }
+
+  a:hover {
+    color:$secondary-color;
   }
 
   .icon {
@@ -138,8 +173,8 @@ export default {
       border-style: solid;
       border-width: 1px;
       border-color: $primary-colour;
-      margin: 20px;
-      padding-bottom: 20px;
+      margin: 60px;
+      // padding-bottom: 20px;
   }
 
   .window-header {
@@ -229,7 +264,7 @@ export default {
   }
 
   img{
-    border-radius: 10px;
+    // border-radius: 10px;
   }
 
   .radio-toolbar {
@@ -290,6 +325,9 @@ export default {
   }
 
   footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background: $footer-colour;
     padding:3em;
     text-align: center;
@@ -311,8 +349,8 @@ export default {
     }
 
     .window {
-        margin: 10px;
-        padding-bottom: 20px;
+        margin: 30px;
+        // padding-bottom: 20px;
     }
 
 

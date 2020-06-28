@@ -7,7 +7,7 @@
         <h3 class="name">Ashir Qureshi</h3>
         <p class="typed-word"><span>&rarr; </span>{{ typedWord }}<span class="cursor">i</span></p>
         <router-link :to="{ name: 'portfolio' }">
-            <button class="btn startbtn" type="button" name="button">Portfolio</button>
+            <button class="btn startbtn" type="button" name="button">Portfolios</button>
         </router-link>
 
       </div>

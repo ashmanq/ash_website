@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="window">
-      <window-title-bar></window-title-bar>
+      <window-title-bar class="title-bar" :title="name"></window-title-bar>
       <!-- <transition name="fade" mode="out-in"> -->
         <loading-animation v-if="!loaded"></loading-animation>
       <!-- </transition> -->
@@ -16,28 +16,34 @@
 
           <div v-if="project" class="information">
             <div class="grid-item">
-              <h2 class="header">{{ name }}</h2>
+              <!-- <h2 class="header">{{ name }}</h2> -->
               <h3 class="date">Date: {{ date }}</h3>
-            </div>
-            <div class="grid-buttons">
-              <a v-if="project.link" v-bind:href="project.link"  type="button" name="button">
-                <img class="icon" src="/icons/demositeicon.svg" v-bind:alt="project.title">
-              </a>
-              <a v-if="project.codelink" v-bind:href="project.codelink"  type="button" name="button">
-                <img class="icon" src="/icons/codeicon.svg" v-bind:alt="project.title">
-              </a>
             </div>
 
             <div class="grid-item">
               <img class="image" v-if="image" @error="imageUrlAlt" v-bind:src="image" v-bind:alt="name">
             </div>
 
-            <article class="grid-item details" v-html="details">
-            </article>
+
             <div class="grid-item">
               <div class="row">
                 <div class="tags row" v-if="tags" v-for="(tag, index) in tags" :tag="tag" :key="index">{{tag}}</div>
               </div>
+            </div>
+
+
+
+
+            <article class="grid-item details" v-html="details">
+            </article>
+
+            <div class="grid-buttons">
+              <a v-if="project.link" v-bind:href="project.link"  type="button" name="button">
+                <img class="icon" src="/icons/webpageicon.svg" v-bind:alt="project.title">
+              </a>
+              <a v-if="project.codelink" v-bind:href="project.codelink"  type="button" name="button">
+                <img class="icon" src="/icons/codeicon.svg" v-bind:alt="project.title">
+              </a>
             </div>
 
           </div>
@@ -116,6 +122,7 @@ export default {
     grid-row: auto;
     grid-gap: 1em 6em;
     margin-top: 3em;
+    margin-bottom: 3em;
   }
 
   .header {
@@ -135,6 +142,7 @@ export default {
   .date {
     margin-top: 0px;
     text-align: left;
+    font-size: 1.5em;
     color: $font-colour-secondary;
   }
 
@@ -161,8 +169,8 @@ export default {
 
   .image {
     object-fit: cover;
-    width: 100%;
-    margin: 1.8em 0em 0em 0em;
+    width: 60%;
+    margin: 1.8em auto 0em;
   }
 
   .btn {
@@ -184,6 +192,7 @@ export default {
       max-width: 90%;
       grid-gap: 1em 3em;
       margin-top: 2em;
+      margin-bottom: 2em;
     }
 
     .header {
@@ -201,7 +210,8 @@ export default {
     }
 
     .image {
-      margin: 1em 0em 0em 0em;
+      margin: 1em auto 0em;
+      width: 80%;
     }
 
     .btn {

@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="">
+  <div class="project-item-container">
     <router-link :to="'/portfolio/'+ project.type + '/' + project.id">
       <div class="image">
         <img v-if="project.image" class="project-item" @error="imageUrlAlt" v-bind:src="project.image" alt="">
@@ -36,13 +36,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .project-item-container {
+    justify-content: center;
+  }
+
   .image {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 210px;
-    height: 180px;
-    margin: 1em;
+    width: 400px;
+    height: 225px;
+    // margin: 1em;
     align-items: center;
     justify-content: center;
   }
@@ -59,7 +64,7 @@ export default {
     width: 100%;
     height: 100%;
     color:#DFDFDF;
-    border-radius: 7px;
+    // border-radius: 7px;
     transition: 0.2s;
   }
 
@@ -72,7 +77,8 @@ export default {
     justify-content: center;
     background-color: $secondary-color;
     margin: 0;
-    opacity: 0;
+    opacity: 0.6;
+    // border-radius: 5px;
     width:100%;
     height:100%;
     transition: all 0.2s ease-in-out;
@@ -103,6 +109,17 @@ export default {
 
     .name {
       font-size: 1.2em;
+    }
+
+    .image {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 200px;
+      height: 112px;
+      margin: 1em;
+      align-items: center;
+      justify-content: center;
     }
 
 

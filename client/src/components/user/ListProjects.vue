@@ -1,6 +1,6 @@
 <!--  This component will be used to list all projects -->
 <template lang="html">
-  <div class="container">
+  <div class="containers">
     <transition name="fade" mode="out-in">
       <loading-animation v-if="!loaded"></loading-animation>
       <div class="container" v-if="results && results!='err'">
@@ -56,8 +56,9 @@ export default {
   .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 1em;
+    justify-content: center;
+    padding-top: 3em;
+    padding-bottom: 3em;
   }
 
 </style>
