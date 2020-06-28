@@ -8,6 +8,7 @@
         <p class="warning-msg" v-if="results=='err'">
           There was an issue loading this list!
         </p>
+        <h3 v-if="!results.length">No projects to list, yet!</h3>
       </div>
 
     </transition>

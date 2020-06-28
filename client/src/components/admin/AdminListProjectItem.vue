@@ -18,7 +18,6 @@
 
     </div>
 
-        <!-- <message-box v-if="showPopup" message="Confirm Delete?" event="admin-project-delete"></message-box> -->
   </div>
 </template>
 
