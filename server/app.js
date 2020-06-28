@@ -41,7 +41,8 @@ con.connect((err) => {
     // Routes with base_uri appended
     app.use(process.env.SUB_URI + '/api/coding', codingRouter);
     app.use(process.env.SUB_URI + '/api/art', artRouter);
-    app.use(process.env.SUB_URI + '/api/admin', adminRoute);
+    app.use(process.env.SUB_URI + '/api/admin', adminRouter);
+    app.use(process.env.SUB_URI + '/api/mail/send', mailRouter);
   } else {
     // Routes without any base_uri
     app.use('/api/coding', codingRouter);
