@@ -163,6 +163,7 @@ export default {
     }
     .info {
       padding-top: 0;
+      display:block;
     }
     .form {
       grid-template-columns: 1fr ;

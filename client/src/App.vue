@@ -349,7 +349,7 @@ export default {
     }
 
     .window {
-        margin: 30px;
+        margin: 5px;
         // padding-bottom: 20px;
     }
 
