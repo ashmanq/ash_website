@@ -2,7 +2,7 @@ node_modules
 .env
 .DS_Store
 config.js
-/dist
+/client/dist
 
 # local env files
 .env.local
