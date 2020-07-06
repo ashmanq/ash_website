@@ -2,7 +2,7 @@
   <div id="app">
 
     <div class="row">
-      <router-link :to="{ name: 'home' }">
+      <router-link class="logo-link" :to="{ name: 'home' }">
         <img class="logo" src="/ashqurlogo.svg" alt="AshQur">
       </router-link>
 
@@ -85,15 +85,22 @@ export default {
   .row {
     display: flex;
     justify-content:center;
-    // background: $secondary-color;
+    align-content: center;
+    background: $secondary-color-hover;
     border-style: none;
   }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+  }
+
   .logo {
     text-decoration:none;
-    height:1.3em;
-    // background: $secondary-color;
+    justify-content: center;
+    height:4em;
     border-radius: 0;
-    padding: 1em;
+    padding: 2px;
   }
 
   .logo:hover {
@@ -107,6 +114,13 @@ export default {
 
   .links {
     display:flex;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .logo {
+      height:2em;
+    }
+
   }
 
 
@@ -214,9 +228,11 @@ export default {
     padding-left: 0.7em;
   }
   nav {
-    padding: 1em;
+    display: flex;
+    padding: 1em 0em;
     // background: $secondary-color;
     text-align: right;
+    align-items: center;
   }
   nav a{
     text-decoration: none;
@@ -349,7 +365,8 @@ export default {
     }
 
     .window {
-        margin: 5px;
+        margin: 20px 5px 5px 5px;
+
         // padding-bottom: 20px;
     }
 
@@ -402,7 +419,6 @@ export default {
       color: $font-colour;
       font-size: 1.1em;
     }
-
 
   }
 </style>
