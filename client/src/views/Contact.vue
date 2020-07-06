@@ -145,6 +145,8 @@ export default {
     font-size: 1.2em;
     font-family: $primary-font;
     margin:0.2em;
+    width:100%;
+    border-width: 0;
   }
 
   .warning-msg {
