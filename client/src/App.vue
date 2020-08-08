@@ -8,8 +8,8 @@
 
       <nav>
         <router-link :to="{ name: 'portfolio' }">Portfolios</router-link>
-        <router-link :to="{ name: 'contact' }">Contact</router-link>
         <router-link :to="{ name: 'aboutme' }">About Me</router-link>
+        <router-link :to="{ name: 'contact' }">Contact</router-link>
       </nav>
     </div>
 
@@ -84,9 +84,12 @@ export default {
 <style lang="scss"  scoped>
   .row {
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
+    margin: auto;
     align-content: center;
-    background: $secondary-color-hover;
+    padding:1rem;
+    max-width:1200px;
+    // background: $secondary-color-hover;
     border-style: none;
   }
 
@@ -141,7 +144,7 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
 
   body {
-    background-color:$primary-colour;
+    background-color:$background-colour;
     // margin: 0;
     // background:
     // linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
@@ -208,10 +211,11 @@ export default {
 
   #app {
     /* font-family: Helvetica, Arial, sans-serif; */
-    font-family: Roboto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    // font-family: Roboto;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
     // text-align: center;
+    font-family: 'firacode';
     color:$font-colour;
 
   }
@@ -258,6 +262,7 @@ export default {
   }
 
   .btn{
+    font-family: 'firacode';
     text-decoration: none;
     font-weight: bold;
     outline: none;
