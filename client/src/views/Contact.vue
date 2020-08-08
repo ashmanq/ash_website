@@ -16,7 +16,7 @@
             <textarea name="message" rows="8" cols="80" v-model:value="newMail.message" required></textarea>
             <label for=""></label>
             <input id="sub-btn" class="btn"
-            type="submit" name="submit" value="submit"/>
+            type="submit" name="submit" value="Submit"/>
             <p></p>
             <div class="info">
 
@@ -97,6 +97,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  * {
+    box-sizing: border-box;
+  }
 
   .info {
     padding-top: 3em;
@@ -142,13 +145,13 @@ export default {
     text-align: right;
   }
   .form input[type=text],input[type=email],input[type=submit],textarea {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-family: $primary-font;
     margin:0.2em;
     resize: none;
     width:100%;
     border-width: 0;
-
+    box-sizing: border-box;
   }
 
   .warning-msg {
@@ -180,7 +183,7 @@ export default {
       padding: 0.3em;
     }
     .form input[type=text],input[type=email],input[type=submit],textarea {
-      font-size: 1em;
+      font-size: 1.2em;
       padding: 0.2em;
       margin:0em;
     }

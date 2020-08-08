@@ -180,7 +180,6 @@ export default {
 
   .tags {
     margin: 1em 1.5em 0 1em;
-    font-weight: bold;
     text-align: center;
     padding: 0.6em;
     background-color: $secondary-color;

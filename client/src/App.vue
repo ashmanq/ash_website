@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <div class="row">
       <router-link class="logo-link" :to="{ name: 'home' }">
         <img class="logo" src="/ashqurlogo.svg" alt="AshQur">
@@ -11,13 +10,16 @@
         <router-link :to="{ name: 'aboutme' }">About Me</router-link>
         <router-link :to="{ name: 'contact' }">Contact</router-link>
       </nav>
+      <div class="menu-btn">
+        <div class="menu-btn__burger"></div>
+      </div>
     </div>
 
     <transition name="fade" mode="out-in">
       <router-view id="view"></router-view>
     </transition>
 
-    <footer>
+    <footer class="footer">
       <div class="copyright">
         &copy; Ashir Qureshi {{getCurrentYear()}}
       </div>
@@ -83,14 +85,15 @@ export default {
 
 <style lang="scss"  scoped>
   .row {
+    width:90%;
     display: flex;
     justify-content:space-between;
-    margin: auto;
+    // margin: auto;
     align-content: center;
     padding:1rem;
     max-width:1200px;
-    // background: $secondary-color-hover;
     border-style: none;
+    flex-shrink: 0;
   }
 
   .logo-link {
@@ -124,6 +127,10 @@ export default {
       height:2em;
     }
 
+    nav {
+      display:none;
+    }
+
   }
 
 
@@ -143,20 +150,28 @@ export default {
 
   @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
 
-  body {
-    background-color:$background-colour;
-    // margin: 0;
-    // background:
-    // linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-    // linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-    // linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-    // linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-    // linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-    // linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-    // background-color: #131313;
-    // background-size: 20px 20px;
+  html, body {
+    height: 100%;
   }
 
+  body {
+    background-color:$background-colour;
+  }
+
+  #app {
+    height: 100%;
+    font-family: 'firacode';
+    color:$font-colour;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #view {
+    flex: 1;
+    justify-content: flex-start;
+    // width: 70%;
+  }
   a {
     text-decoration: none;
     color:$font-colour-secondary;
@@ -184,14 +199,14 @@ export default {
   }
 
   .window {
-      background: $background-colour;
-
-      border-radius: 12px 12px 0 0;
-      border-style: solid;
-      border-width: 1px;
-      border-color: $primary-colour;
-      margin: 60px;
-      // padding-bottom: 20px;
+    width:90%;
+    max-width: 1200px;
+    background: $background-colour;
+    border-radius: 12px 12px 0 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $primary-colour;
+    margin: 3rem auto 3rem auto;
   }
 
   .window-header {
@@ -209,21 +224,8 @@ export default {
 
   }
 
-  #app {
-    /* font-family: Helvetica, Arial, sans-serif; */
-    // font-family: Roboto;
-    // -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
-    // text-align: center;
-    font-family: 'firacode';
-    color:$font-colour;
-
-  }
-
-
   h1 {
     font-size: 2.5rem;
-    font-weight: bold;
   }
 
   h2 {
@@ -231,10 +233,13 @@ export default {
     border-left: 6px solid purple;
     padding-left: 0.7em;
   }
+
+  h3 {
+    font-weight: normal;
+  }
   nav {
     display: flex;
     padding: 1em 0em;
-    // background: $secondary-color;
     text-align: right;
     align-items: center;
   }
@@ -243,14 +248,11 @@ export default {
     margin-left: 2em;
     padding: .5em;
     font-size: 1.3em;
-    font-weight: bold;
     color: $font-colour;
-    // background-color: $secondary-color;
     transition: 0.2s;
   }
 
   nav a:hover {
-    // color: $font-hover-color;
     color: $font-colour-secondary;
   }
 
@@ -264,7 +266,6 @@ export default {
   .btn{
     font-family: 'firacode';
     text-decoration: none;
-    font-weight: bold;
     outline: none;
     font-size: 1.5em;
     color: #D8D8D8;
@@ -279,13 +280,8 @@ export default {
   }
 
   .btn:hover{
-    // background-color: #6640e3;
     background-color: $secondary-color-hover;
     color:$font-colour-secondary;
-  }
-
-  img{
-    // border-radius: 10px;
   }
 
   .radio-toolbar {
@@ -301,7 +297,6 @@ export default {
     background-color: $secondary-color;
     padding: 1em 1.1em;
     font-size: 1.2em;
-    font-weight: bolder;
     border-radius: 4px;
     width: 150px;
     color: $font-colour;
@@ -316,7 +311,6 @@ export default {
     color: black;
     cursor: pointer;
   }
-
 
   .breadcrumb {
     text-decoration:none;
@@ -345,7 +339,10 @@ export default {
     opacity: 0
   }
 
-  footer {
+  .footer {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -366,20 +363,18 @@ export default {
     }
 
     .warning-msg {
-        font-size: 1em;
+      font-size: 1em;
     }
 
     .window {
-        margin: 20px 5px 5px 5px;
-
-        // padding-bottom: 20px;
+      width:100%;
+      // margin: 20px 5px 5px 5px;
+      margin: 2rem auto 2rem auto;
     }
-
 
     .container {
       width:95%;
     }
-
 
     h1 {
       font-size: 2rem;
@@ -415,14 +410,17 @@ export default {
     .breadcrumb {
       font-size: 1em;
       padding: 0.5em;
-    }
-
-
-
-    .breadcrumb {
       text-transform: capitalize;
       color: $font-colour;
       font-size: 1.1em;
+    }
+
+    .footer {
+      flex-direction: column;
+
+      .copyright {
+        margin-bottom: 1rem;
+      }
     }
 
   }
