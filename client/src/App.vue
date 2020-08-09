@@ -2,24 +2,27 @@
   <div id="app">
     <div class="row">
       <router-link class="logo-link" :to="{ name: 'home' }">
-        <img class="logo" src="/ashqurlogo.svg" alt="AshQur">
+        <img v-on:click="closeMenu" class="logo" src="/ashqurlogo.svg" alt="AshQur">
       </router-link>
 
-      <nav>
+      <nav v-bind:class="{ open: isOpen }" v-on:click="closeMenu">
         <router-link :to="{ name: 'portfolio' }">Portfolios</router-link>
-        <router-link :to="{ name: 'aboutme' }">About Me</router-link>
+        <router-link :to="{ name: 'aboutme' }">About</router-link>
         <router-link :to="{ name: 'contact' }">Contact</router-link>
       </nav>
-      <div class="menu-btn">
-        <div class="menu-btn__burger"></div>
+
+      <div class="menu-btn" v-on:click="mobileNavMenu" v-bind:class="{ open: isOpen }">
+        <div class="menu-btn__burger top-line"></div>
+        <div class="menu-btn__burger middle-line"></div>
+        <div class="menu-btn__burger bottom-line"></div>
       </div>
     </div>
 
     <transition name="fade" mode="out-in">
-      <router-view id="view"></router-view>
+      <router-view id="view" v-bind:class="{ open: isOpen }"></router-view>
     </transition>
 
-    <footer class="footer">
+    <footer class="footer" v-bind:class="{ open: isOpen }">
       <div class="copyright">
         &copy; Ashir Qureshi {{getCurrentYear()}}
       </div>
@@ -56,7 +59,7 @@ export default {
   data() {
     return {
       loaded: false,
-
+      isOpen: false,
     }
   },
   mounted() {
@@ -74,6 +77,14 @@ export default {
   methods: {
     getCurrentYear: function() {
       return new Date().getFullYear();
+    },
+    mobileNavMenu: function() {
+      this.isOpen = !this.isOpen;
+    },
+    closeMenu: function() {
+      this.isOpen = false;
+      console.log("clicked");
+      
     }
   },
   components: {
@@ -94,6 +105,7 @@ export default {
     max-width:1200px;
     border-style: none;
     flex-shrink: 0;
+    transition: all 0.5s ease-in-out;
   }
 
   .logo-link {
@@ -107,6 +119,7 @@ export default {
     height:4em;
     border-radius: 0;
     padding: 2px;
+    z-index: 10;
   }
 
   .logo:hover {
@@ -122,13 +135,104 @@ export default {
     display:flex;
   }
 
+  // Menu button styling
+
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    display: none;
+    z-index: 10;
+  }
+  .menu-btn__burger {
+    content: '';
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+  }
+
+  /* Menu Button Animation */
+  .menu-btn.open .menu-btn__burger.middle-line {
+    background: transparent;
+  }
+  .menu-btn.open .menu-btn__burger.top-line {
+    transform-origin: center;
+    transform: translateY(13.5px) rotate(45deg);
+  }
+  .menu-btn.open .menu-btn__burger.bottom-line{
+    transform-origin: center;
+    transform: translateY(-13.5px) rotate(-45deg);
+  }
+
+
   @media only screen and (max-width: 600px) {
     .logo {
-      height:2em;
+      height:40px;
     }
 
     nav {
-      display:none;
+      position: fixed;
+      box-sizing: border-box;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 100%;
+      font-size: 2rem;
+      background-color: $background-colour;
+      flex-direction: column;
+      justify-content: space-evenly;
+      text-align: right;
+      align-items: center;
+      z-index: 3;
+      clip-path: circle(10px at 90% -10%);
+      -webkit-clip-path: circle(10px at 90% -10%);
+      transition: all 0.8s ease-out;
+      pointer-events: none;
+    }
+
+    nav a {
+      margin: 0;
+    }
+
+
+    .menu-btn {
+      display: flex;
+    }
+
+    .footer.open {
+      display: none;
+    }
+
+    #view.open {
+      overflow-y: hidden;
+    }
+
+
+    nav.open {
+      display: flex;
+      clip-path: circle(2000px at 90% -10%);
+      -webkit-clip-path: circle(2000px at 90% -10%);
+      pointer-events: all;
+      
+    }
+
+    // These lines cut out page transitions to stop footer jumping when selecting link from mobile nav
+    .fade-enter-active,
+    .fade-leave-active {
+      transition-duration: 0s;
+    }
+
+    .fade-enter,
+    .fade-leave-active {
+      transition-duration: 0s;
     }
 
   }
@@ -148,7 +252,7 @@ export default {
     src: url('./assets/font/FiraCode-VariableFont_wght.ttf') format('truetype');
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+  // @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap', "crossorigin=anonymous");
 
   html, body {
     height: 100%;
@@ -169,8 +273,8 @@ export default {
 
   #view {
     flex: 1;
+    flex-basis: auto;
     justify-content: flex-start;
-    // width: 70%;
   }
   a {
     text-decoration: none;
@@ -349,6 +453,8 @@ export default {
     background: $footer-colour;
     padding:3em;
     text-align: center;
+    transition-delay: 0.6s;
+    transition-property: display;
   }
 
   @media only screen and (max-width: 600px) {
