@@ -127,6 +127,7 @@ export default {
 
     .typed-word {
       font-size: 1.8em;
+      font-weight: normal;
     }
 
     .cursor {

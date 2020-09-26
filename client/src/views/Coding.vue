@@ -28,6 +28,8 @@ export default {
 
 <style lang="scss" scoped>
   .coding-projects {
+    width:90%;
+    max-width: 1200px;
     margin: 3em;
     border-radius: 0.8em;
   }

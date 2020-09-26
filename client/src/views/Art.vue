@@ -31,6 +31,8 @@ export default {
   .art-projects {
     margin: 3em;
     border-radius: 0.8em;
+    width:90%;
+    max-width: 1200px;
   }
 
   @media only screen and (max-width: 600px) {
